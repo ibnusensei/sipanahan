@@ -29,7 +29,7 @@ class Export extends CI_Controller {
         
 
         $pdf->SetFont('', 'B', 12);
-        $pdf->Image(base_url($d->image), 70, 25, 75, 75, 'PNG', 'http://www.tcpdf.org', '', true, 100, '', false, false, 1, false, false, false);
+        $pdf->Image(base_url($d->image), 70, 25, 75, 75, '', 'http://www.tcpdf.org', '', true, 100, '', false, false, 1, false, false, false);
         $pdf->Cell(185, 8, $d->nama, 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         $pdf->Cell(50, 8, "Email ", 1, 0, 'L');

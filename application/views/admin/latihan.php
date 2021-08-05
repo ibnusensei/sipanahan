@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-md-6">
                     <form role="search" action="<?php echo site_url('latihan')?>" method="get" class="app-search d-flex me-5">
-                        <input type="date" placeholder="" value="<?php echo $_GET['a'] ?? '' ?>" name="a" class="form-control mt-0 w-50 mr-2">
-                        <input type="date" placeholder="Cari Nama..." value="<?php echo $_GET['b'] ?? '' ?>" name="b" class="form-control mt-0 w-50">
+                        <input type="date" placeholder="" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a" class="form-control mt-0 w-50 mr-2">
+                        <input type="date" placeholder="Cari Nama..." value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b" class="form-control mt-0 w-50">
                         <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
                         <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url('latihan')?>" role="button"><i class="fa fa-times"></i></a>
                     </form>

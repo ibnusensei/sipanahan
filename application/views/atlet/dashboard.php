@@ -56,7 +56,13 @@
     $this->load->model(['m_app']);
     $nilai = $this->m_app->getPenilaian($this->session->id)->row();
 ?>
-<?php $total = $nilai->n1 .','. $nilai->n2 .','. $nilai->n3 .','. $nilai->n4 .','. $nilai->n5 .','. $nilai->n6 .','. $nilai->n7 .','. $nilai->n8 .','. $nilai->n9 ?>
+<?php 
+if ($nilai != null) {
+    $total = $nilai->n1 .','. $nilai->n2 .','. $nilai->n3 .','. $nilai->n4 .','. $nilai->n5 .','. $nilai->n6 .','. $nilai->n7 .','. $nilai->n8 .','. $nilai->n9;
+} else {
+    $total = '0,0,0,0,0,0,0,0,0';
+}
+?>
 <script>
     var ctx = document.getElementById('nilai').getContext('2d');
     var chart = new Chart(ctx, {

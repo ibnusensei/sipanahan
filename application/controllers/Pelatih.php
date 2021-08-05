@@ -37,7 +37,7 @@ class Pelatih extends CI_Controller {
             'page'  =>  'pelatih/profil',
             'head'  =>  'akun',
             'title' =>  'Profil',
-            'user'  =>  $this->m_app->getAnggota($this->session->id)->row(),
+            'user'  =>  $this->m_app->getPelatih($this->session->id)->row(),
         ];
 
         $this->load->view('layout/pelatih', $var);

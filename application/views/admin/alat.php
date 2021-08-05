@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-6">
                     <form role="search" action="<?php echo site_url('alat')?>" method="get" class="app-search d-flex me-5">
-                        <input type="text" placeholder="Cari Alat..." value="<?php echo $_GET['search'] ?? '' ?>" name="search" class="form-control mt-0">
+                        <input type="text" placeholder="Cari Alat..." value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search" class="form-control mt-0">
                         <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
                         <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url('alat')?>" role="button"><i class="fa fa-times"></i></a>
                     </form>

@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-6">
                 <form role="search" action="<?php echo site_url($linksearch)?>" method="get" class="app-search d-flex me-5">
-                    <input type="text" placeholder="Cari Nama..." value="<?php echo $_GET['search'] ?? '' ?>" name="search" class="form-control mt-0">
+                    <input type="text" placeholder="Cari Nama..." value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search" class="form-control mt-0">
                     <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
                     <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url($linksearch)?>" role="button"><i class="fa fa-times"></i></a>
                 </form>
@@ -372,60 +372,60 @@
                 <canvas class="mb-4" id="nilai<?= $d->id ?>"></canvas>
                 <form action="<?= site_url('user/penilaian') ?>" method="post">
                     <input type="hidden" name="user_id" value="<?= $d->id ?>">
-                    <input type="hidden" name="id" value="<?= $nilai->id ?? '' ?>">
+                    <input type="hidden" name="id" value="<?= (!empty($nilai->id)) ? $nilai->id : '' ?>">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Stance</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n1" value="<?= $nilai->n1 ?? '' ?>" placeholder="Stance">
+                                <input type="number" max="10" min="0" class="form-control" name="n1" value="<?= (!empty($nilai->n1)) ? $nilai->n1 : '' ?>" placeholder="Stance">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Nocking</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n2" value="<?= $nilai->n2 ?? '' ?>" placeholder="Nocking">
+                                <input type="number" max="10" min="0" class="form-control" name="n2" value="<?= (!empty($nilai->n2)) ? $nilai->n2 : '' ?>" placeholder="Nocking">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Set Up</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n3" value="<?= $nilai->n3 ?? '' ?>" placeholder="Set Up">
+                                <input type="number" max="10" min="0" class="form-control" name="n3" value="<?= (!empty($nilai->n3)) ? $nilai->n3 : '' ?>" placeholder="Set Up">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Drawing</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n4" value="<?= $nilai->n4 ?? '' ?>" placeholder="Drawing">
+                                <input type="number" max="10" min="0" class="form-control" name="n4" value="<?= (!empty($nilai->n4)) ? $nilai->n4 : '' ?>" placeholder="Drawing">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Anchoring</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n5" value="<?= $nilai->n5 ?? '' ?>" placeholder="Anchoring">
+                                <input type="number" max="10" min="0" class="form-control" name="n5" value="<?= (!empty($nilai->n5)) ? $nilai->n1 : '' ?>" placeholder="Anchoring">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Holding</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n6" value="<?= $nilai->n6 ?? '' ?>" placeholder="Holding">
+                                <input type="number" max="10" min="0" class="form-control" name="n6" value="<?= (!empty($nilai->n6)) ? $nilai->n6 : '' ?>" placeholder="Holding">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Aiming</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n7" value="<?= $nilai->n7 ?? '' ?>" placeholder="Aiming">
+                                <input type="number" max="10" min="0" class="form-control" name="n7" value="<?= (!empty($nilai->n7)) ? $nilai->n7 : '' ?>" placeholder="Aiming">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Release</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n8" value="<?= $nilai->n8 ?? '' ?>" placeholder="Release">
+                                <input type="number" max="10" min="0" class="form-control" name="n8" value="<?= (!empty($nilai->n8)) ? $nilai->n8 : '' ?>" placeholder="Release">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="">Follow Through</label>
-                                <input type="number" max="10" min="0" class="form-control" name="n9" value="<?= $nilai->n9 ?? '' ?>" placeholder="Follow Through">
+                                <input type="number" max="10" min="0" class="form-control" name="n9" value="<?= (!empty($nilai->n9)) ? $nilai->n9 : '' ?>" placeholder="Follow Through">
                             </div>
                         </div>
                     </div>
