@@ -117,6 +117,7 @@ class Atlet extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('kehadiran', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 

@@ -60,7 +60,7 @@ class Alat extends CI_Controller {
         $id =   $this->input->post('id');
         $d  =   $this->m_app->getAlat($id)->row();
         if ($this->input->post()) {
-            if ($this->input->post['image'] != null) {
+            if ($_FILES["image"]["name"] != null) {
                 $file =  $_FILES["image"]["name"];
                 $upload = $this->m_app->uploadImage($file, 'alat');
                 if($upload == 'error') {

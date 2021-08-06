@@ -39,6 +39,7 @@ class Latihan extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('latihan', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -61,6 +62,7 @@ class Latihan extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->update('latihan', $data, $id);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -80,6 +82,7 @@ class Latihan extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('kehadiran', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -99,6 +102,7 @@ class Latihan extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->update('kehadiran', $data, $id);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 

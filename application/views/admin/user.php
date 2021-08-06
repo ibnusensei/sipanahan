@@ -128,14 +128,14 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="nama">Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="nama" required placeholder="Nama Lengkap">
+                                    <input type="text" class="form-control" name="nama" require="" placeholder="Nama Lengkap">
                             </div>
                         </div>
 
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email"required placeholder="Email">
+                                    <input type="email" class="form-control" name="email" require="" placeholder="Email">
                             </div>
                         </div>
 
@@ -320,7 +320,7 @@
             <?php if($d->image == null): ?>
                 <div class="box-gambar"><img src="<?=base_url('assets/img/default-user.svg')?>" style="width:100%; max-height:100px" id="" alt="Your Image"></div>
             <?php else: ?>
-                <div class="box-gambar"><img src="<?=base_url($d->image)?>" style="max-height:200px" id="" alt="Your Image"></div>
+                <div class="box-gambar"><img src="<?=base_url($d->image)?>" style="max-height:200px; width:100%" id="" alt="Your Image"></div>
             <?php endif; ?>
 			
 

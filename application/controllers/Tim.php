@@ -33,6 +33,7 @@ class Tim extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('tim', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -53,6 +54,7 @@ class Tim extends CI_Controller {
             $id   = $this->input->post('id');
             $this->m_app->update('tim', $data, $id);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 

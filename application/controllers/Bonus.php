@@ -46,6 +46,7 @@ class Bonus extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('bonus', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -68,6 +69,7 @@ class Bonus extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->update('bonus', $data, $id);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 

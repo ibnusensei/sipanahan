@@ -238,7 +238,7 @@ class M_app extends CI_Model {
     public function uploadImage($file, $path) {
         $this->load->library('upload'); 
 
-        $name = $file;
+        $name = preg_replace('/[^A-Za-z0-9.]/', "", $file);
 
         $config['upload_path']   = './assets/img/'. $path;
         $config['allowed_types'] = 'jpg|png|jpeg|gif|svg';

@@ -62,6 +62,7 @@ class User extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('users', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -128,6 +129,7 @@ class User extends CI_Controller {
                 $this->m_app->store('penilaian', $data);
             }
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 

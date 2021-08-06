@@ -38,6 +38,7 @@ class Prestasi extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->store('prestasi', $data);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -59,6 +60,7 @@ class Prestasi extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $this->m_app->update('prestasi', $data, $id);
             
+            $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
         }
 
