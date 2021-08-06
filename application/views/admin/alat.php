@@ -10,11 +10,28 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    <form role="search" action="<?= site_url('export/alat') ?>" method="get" class="">
+                        <input type="hidden" value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search">
+                        <input type="hidden" value="<?php echo (!empty($_GET['kondisi'])) ? $_GET['kondisi'] : '' ?>" name="kondisi">
+                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Export</button>
+                        <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    </form>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <form role="search" action="<?php echo site_url('alat')?>" method="get" class="app-search d-flex me-5">
-                        <input type="text" placeholder="Cari Alat..." value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search" class="form-control mt-0">
+                        <input type="text" placeholder="Cari Alat..." value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search" class="form-control mt-0 mr-2">
+                        <select class="form-control mr-2" name="kondisi" >
+                            <option value="">Pilih Kondisi</option>
+                            <?php foreach ($kondisi as $x => $d) : ?>
+                                <option <?php echo (!empty($_GET['kondisi']) && $_GET['kondisi'] == $x+1) ? 'selected' : '' ?> value="<?= $x+1 ?>"><?= $d ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <select class="form-control" name="jenis" >
+                            <option value="">Pilih Jenis</option>
+                            <?php foreach ($jenis as $x => $d) : ?>
+                                <option <?php echo (!empty($_GET['jenis']) && $_GET['jenis'] == $x+1) ? 'selected' : '' ?> value="<?= $x+1 ?>"><?= $d ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
                         <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url('alat')?>" role="button"><i class="fa fa-times"></i></a>
                     </form>

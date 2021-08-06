@@ -29,7 +29,7 @@ class M_app extends CI_Model {
         if ($var != null) {
             $this->db->where('users.id', $var);
         }
-        if (isset($_GET['search'])) {
+        if (!empty($_GET['search'])) {
             $this->db->like('users.nama', $_GET['search']);
             $this->db->or_like('users.email', $_GET['search']);
         }
@@ -46,7 +46,7 @@ class M_app extends CI_Model {
         if ($var != null) {
             $this->db->where('users.id', $var);
         }
-        if (isset($_GET['search'])) {
+        if (!empty($_GET['search'])) {
             $this->db->like('users.nama', $_GET['search']);
             $this->db->or_like('users.email', $_GET['search']);
         }
@@ -62,7 +62,7 @@ class M_app extends CI_Model {
             $this->db->where('id', $var);
         }
 
-        if (isset($_GET['search'])) {
+        if (!empty($_GET['search'])) {
             $this->db->like('tim', $_GET['search']);
         }
 
@@ -78,9 +78,17 @@ class M_app extends CI_Model {
             $this->db->where('alat.id', $var);
         }
 
-        if (isset($_GET['search'])) {
+        if (!empty($_GET['search'])) {
             $this->db->like('alat', $_GET['search']);
             $this->db->or_like('users.nama', $_GET['search']);
+        }
+
+        if (!empty($_GET['kondisi'])) {
+            $this->db->where('kondisi', $_GET['kondisi']);
+        }
+
+        if (!empty($_GET['jenis'])) {
+            $this->db->where('jenis', $_GET['jenis']);
         }
 
         $this->db->order_by('id', 'DESC');
@@ -163,7 +171,7 @@ class M_app extends CI_Model {
         $this->db->order_by('id', 'DESC');
         $this->db->join('users', 'users.id = prestasi.user_id');
 
-        if (isset($_GET['search'])) {
+        if (!empty($_GET['search'])) {
             $this->db->like('users.nama', $_GET['search']);
         }
 

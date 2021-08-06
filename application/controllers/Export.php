@@ -259,6 +259,35 @@ class Export extends CI_Controller {
         $pdf->Output('Laporan Data Prestasi.pdf'); 
     }
 
+    public function alat() {
+        
+        $data = $this->m_app->getAlat();
+ 
+        $pdf = new \TCPDF();
+        $pdf->AddPage();
+
+        $this->head($pdf);
+
+        $pdf->SetFont('', 'B', 20);
+        $pdf->Cell(185, 0, "Laporan Alat", 0, 1, 'C');
+        $pdf->SetAutoPageBreak(true, 0);
+        // Add Header
+        $pdf->Ln(10);
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(10, 8, "No", 1, 0, 'C');
+        $pdf->Cell(75, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(35, 8, "Pemilik", 1, 0, 'C');
+        $pdf->Cell(35, 8, "Jenis", 1, 0, 'C');
+        $pdf->Cell(35, 8, "Kondisi", 1, 1, 'C');
+        $pdf->SetFont('', '', 12);
+        foreach($data->result_array() as $x => $d) {
+            $this->addAlat($pdf, $x+1, $d);
+        }
+        
+        $this->ttd($pdf);
+        $pdf->Output('Laporan Data Alat.pdf'); 
+    }
+
     private function head($pdf) {
         $pdf->Image(base_url('assets/kop.jpeg'), 0, 0, 200, 0, '', 'http://www.tcpdf.org', 'C', true, 300, '', false, false, 0, true, false, false);
         $pdf->Cell(185, 30, "", 0, 1, 'C');
@@ -314,6 +343,17 @@ class Export extends CI_Controller {
         $pdf->Cell(35, 8, $d['nama'], 1, 0, 'C');
         $pdf->Cell(35, 8, $d['jumlah'], 1, 0, 'C');
         $pdf->Cell(75, 8, $d['bonus'], 1, 1, 'L');
+    }
+
+    private function addAlat($pdf, $no, $d) {
+        $kondisi =  ['', 'Baik', 'Rusak', 'Hilang'];
+        $jenis   =  ['', 'Busur', 'Anak Panah', 'Target'];
+
+        $pdf->Cell(10, 8, $no, 1, 0, 'C');
+        $pdf->Cell(75, 8, $d['alat'], 1, 0, '');
+        $pdf->Cell(35, 8, $d['nama'], 1, 0, 'C');
+        $pdf->Cell(35, 8, $jenis[$d['jenis']], 1, 0, 'C');
+        $pdf->Cell(35, 8, $kondisi[$d['kondisi']], 1, 1, 'L');
     }
 
 }
