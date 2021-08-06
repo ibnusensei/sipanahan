@@ -13,6 +13,7 @@
                     <form role="search" action="<?= site_url('export/alat') ?>" method="get" class="">
                         <input type="hidden" value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search">
                         <input type="hidden" value="<?php echo (!empty($_GET['kondisi'])) ? $_GET['kondisi'] : '' ?>" name="kondisi">
+                        <input type="hidden" value="<?php echo (!empty($_GET['jenis'])) ? $_GET['jenis'] : '' ?>" name="jenis">
                         <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Export</button>
                         <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
                     </form>
