@@ -100,7 +100,7 @@ class M_app extends CI_Model {
             $this->db->where('latihan.user_id', $user_id);
         } 
 
-        if (isset($_GET['a']) && isset($_GET['b'])) {
+        if (!empty($_GET['a']) && !empty($_GET['b'])) {
             $this->db->where('latihan.tanggal >=', $_GET['a']);
             $this->db->where('latihan.tanggal <=', $_GET['b']);
         }
@@ -134,7 +134,7 @@ class M_app extends CI_Model {
             $this->db->where('pertandingan.id', $var);
         }
 
-        if (isset($_GET['a']) && isset($_GET['b'])) {
+        if (!empty($_GET['a']) && !empty($_GET['b'])) {
             $this->db->where('pertandingan.tanggal >=', $_GET['a']);
             $this->db->where('pertandingan.tanggal <=', $_GET['b']);
         }
@@ -155,7 +155,7 @@ class M_app extends CI_Model {
             $this->db->where('prestasi.user_id', $user_id);
         }
 
-        if (isset($_GET['a']) && isset($_GET['b'])) {
+        if (!empty($_GET['a']) && !empty($_GET['b'])) {
             $this->db->where('prestasi.tanggal >=', $_GET['a']);
             $this->db->where('prestasi.tanggal <=', $_GET['b']);
         }
@@ -181,6 +181,12 @@ class M_app extends CI_Model {
         if ($user_id != null) {
             $this->db->where('bonus.user_id', $user_id);
         }
+
+        if (!empty($_GET['a']) && !empty($_GET['b'])) {
+            $this->db->where('bonus.tanggal >=', $_GET['a']);
+            $this->db->where('bonus.tanggal <=', $_GET['b']);
+        }
+
         $this->db->order_by('id', 'DESC');
         $this->db->join('users', 'users.id = bonus.user_id');
         if ($role != null) {

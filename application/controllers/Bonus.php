@@ -13,7 +13,7 @@ class Bonus extends CI_Controller {
     public function atlet() {
         $var    = [
             'page'  =>  'admin/bonus',
-            'title' =>  'Bonus Atlet',
+            'title' =>  'Atlet',
             'bonus' =>  $this->m_app->getBonus(3)->result(),
             'user'  =>  $this->m_app->getAnggota()->result(),
         ];
@@ -23,7 +23,7 @@ class Bonus extends CI_Controller {
     public function pelatih() {
         $var    = [
             'page'  =>  'admin/bonus',
-            'title' =>  'Bonus Pelatih',
+            'title' =>  'Pelatih',
             'bonus' =>  $this->m_app->getBonus(2)->result(),
             'user'  =>  $this->m_app->getPelatih()->result(),
         ];

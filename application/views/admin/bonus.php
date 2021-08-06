@@ -6,11 +6,25 @@
         <div class="white-box">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="box-title"><?= $title ?></h3>
+                    <h3 class="box-title">Bonus <?= $title ?></h3>
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    <form role="search" action="<?= site_url('export/bonus') ?>" method="get" class="">
+                        <input type="hidden" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a">
+                        <input type="hidden" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b">
+                        <input type="hidden" name="role" value="<?php echo ($title == 'Atlet') ? '3' : '2' ?>">
+                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Export</button>
+                        <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form role="search" action="" method="get" class="app-search d-flex me-5">
+                        <input type="date" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a" class="form-control mt-0 w-50 mr-2">
+                        <input type="date" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b" class="form-control mt-0 w-50">
+                        <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
+                        <a name="" id="" class="btn btn-link text-danger" href="" role="button"><i class="fa fa-times"></i></a>
+                    </form>
                 </div>
             </div>
             
@@ -20,7 +34,7 @@
                         <tr>
                             <th class="border-top-0">#</th>
                             <th class="border-top-0">Tanggal</th>
-                            <th class="border-top-0">Atlet</th>
+                            <th class="border-top-0"><?= $title ?></th>
                             <th class="border-top-0">Bonus</th>
                             <th class="border-top-0">Aksi</th>
                         </tr>
