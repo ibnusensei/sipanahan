@@ -483,6 +483,12 @@ if ($nilai != null) {
             line: {
                 borderWidth: 3
             }
+            },
+            scale: {
+                ticks: {
+                    beginAtZero: true,
+                    max: 10
+                }
             }
         },
     });
