@@ -51,6 +51,8 @@ class User extends CI_Controller {
             $data = [
                 'nama'      => $this->input->post('nama'),
                 'email'     => $this->input->post('email'),
+                'telepon'   => $this->input->post('telepon'),
+                'alamat'    => $this->input->post('alamat'),
                 'username'  => $this->input->post('username'),
                 'password'  => $this->bcrypt->hash($this->input->post('username')),
                 'tim_id'    => $this->input->post('tim_id'),
@@ -85,6 +87,8 @@ class User extends CI_Controller {
             $data = [
                 'nama'      => $this->input->post('nama'),
                 'email'     => $this->input->post('email'),
+                'telepon'   => $this->input->post('telepon'),
+                'alamat'    => $this->input->post('alamat'),
                 'username'  => $this->input->post('username'),
                 'password'  => $this->bcrypt->hash($this->input->post('username')),
                 'tim_id'    => $this->input->post('tim_id'),

@@ -179,6 +179,13 @@ class M_app extends CI_Model {
     	return $this->db->get();
     }
 
+    public function getLapangan() {
+        $this->db->select('lapangan.*, users.id AS user_id, users.nama');
+        $this->db->join('users', 'users.id = lapangan.user_id');
+        $this->db->from('lapangan');
+        return $this->db->get();
+    }
+
     // Bonus 
     function getBonus($role = null, $var = null, $user_id = null) {
         $this->db->select('bonus.*, users.id AS user_id, users.nama, users.level' );

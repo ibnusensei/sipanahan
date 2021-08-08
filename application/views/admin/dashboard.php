@@ -30,7 +30,7 @@
     </div>
     <div class="col-lg-4 col-md-12">
         <div class="white-box analytics-info">
-            <h3 class="box-title">Unique Pelatih</h3>
+            <h3 class="box-title">Total Pelatih</h3>
             <ul class="list-inline two-part d-flex align-items-center mb-0">
                 <li>
                     <div id="sparklinedash3"><canvas width="67" height="30"

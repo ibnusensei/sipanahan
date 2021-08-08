@@ -38,7 +38,7 @@
                         <tr>
                             <th class="border-top-0">#</th>
                             <th class="border-top-0">Nama</th>
-                            <th class="border-top-0">Email</th>
+                            <th class="border-top-0">Email/Telp</th>
                             <th class="border-top-0">Tim</th>
                             <th class="border-top-0">Status</th>
                             <th class="border-top-0">Aksi</th>
@@ -54,7 +54,7 @@
                                     <span><?=$data->nama?></span>
                                 </a>
                             </td>
-                            <td><?= $data->email ?></td>
+                            <td><?= $data->email ?> <br> <?= $data->telepon ?></td>
                             <td><?= $data->tim  ?></td>
                             <td>
                                 <?php if($data->status == "1"): ?>
@@ -128,14 +128,28 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="nama">Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="nama" require="" placeholder="Nama Lengkap">
+                                    <input type="text" class="form-control" name="nama" required placeholder="Nama Lengkap">
                             </div>
                         </div>
 
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" require="" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" required placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="telepon">Telepon</label>
+                                    <input type="text" class="form-control" name="telepon" required placeholder="Telepon">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                    <input type="text" class="form-control" name="alamat" required placeholder="Alamat">
                             </div>
                         </div>
 
@@ -200,21 +214,35 @@
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="nama">Nama Lengkap</label>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?= $d->nama ?>">
+                                    <input type="text" class="form-control" name="nama" required placeholder="Nama Lengkap" value="<?= $d->nama ?>">
                             </div>
                         </div>
 
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email" value="<?= $d->email ?>">
+                                    <input type="email" class="form-control" name="email" required placeholder="Email" value="<?= $d->email ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="telepon">Telepon</label>
+                                    <input type="text" class="form-control" name="telepon" required placeholder="Telepon" value="<?= $d->telepon ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                    <input type="text" class="form-control" name="alamat" required placeholder="Alamat" value="<?= $d->alamat ?>">
                             </div>
                         </div>
 
                         <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" maxlength="12" value="<?= $d->username ?>">
+                                    <input type="text" class="form-control" id="username" required name="username" placeholder="Username" maxlength="12" value="<?= $d->username ?>">
                                     <small>Username akan menjadi password default user</small>
                             </div>
                         </div>
@@ -248,7 +276,7 @@
                         </div>
 
                         <div class="col-xs-12">
-                        <div class="box-gambar"><img src="<?=base_url($d->image)?>" id="blah_<?= $d->id ?>" alt="Your Image" style="height:200px;"></div>
+                        <div class="box-gambar"><img src="<?=base_url($d->image)?>" id="blah_<?= $d->id ?>" alt="Your Image" style="height:200px; width:100%"></div>
 						<div class="form-group mt-3">
 		                    <div class="custom-file">
 		                      	<input type="file" class="custom-file-input" name="image" id="image" onChange="readURL<?=$d->id?>(this);" value="<?=$d->image?>" required>
@@ -316,11 +344,13 @@
 
             <dt>
 			<dd>Email : <?=$d->email?><dd>
+            <dd>Telepon : <?=$d->telepon?><dd>
+            <dd>Alamat : <?=$d->alamat?><dd>
             <br>
             <?php if($d->image == null): ?>
-                <div class="box-gambar"><img src="<?=base_url('assets/img/default-user.svg')?>" style="width:100%; max-height:100px" id="" alt="Your Image"></div>
+                <div class="box-gambar"><img src="<?=base_url('assets/img/default-user.svg')?>" style=" height:100%; width:100%; " id="" alt="Your Image"></div>
             <?php else: ?>
-                <div class="box-gambar"><img src="<?=base_url($d->image)?>" style="max-height:200px; width:100%" id="" alt="Your Image"></div>
+                <div class="box-gambar"><img src="<?=base_url($d->image)?>" style="height:100%; width:100%" id="" alt="Your Image"></div>
             <?php endif; ?>
 			
 

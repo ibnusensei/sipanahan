@@ -187,9 +187,16 @@
                                 <span class="hide-menu">Prestasi</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('lapangan') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                                <span class="hide-menu">Lapangan</span>
+                            </a>
+                        </li>
                         <hr>
                         <li class="text-center p-20 upgrade-btn">
-                            <a href="<?php echo site_url('auth/logout') ?>"
+                            <a href="<?= site_url('auth/logout') ?>"
                                 class="btn d-grid btn-outline-danger" target="">
                                 Log Out</a>
                         </li>
