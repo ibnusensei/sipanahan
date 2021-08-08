@@ -6,7 +6,7 @@
         <div class="white-box">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="box-title">Daftar Tim Panahan</h3>
+                    <h3 class="box-title">Daftar Team Panahan</h3>
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >

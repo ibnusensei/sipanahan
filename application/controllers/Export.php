@@ -34,7 +34,7 @@ class Export extends CI_Controller {
         $pdf->SetFont('', '', 12);
         $pdf->Cell(50, 8, "Email ", 1, 0, 'L');
         $pdf->Cell(135, 8, $d->email, 1, 1, '');
-        $pdf->Cell(50, 8, "Tim ", 1, 0, 'L');
+        $pdf->Cell(50, 8, "Team ", 1, 0, 'L');
         $pdf->Cell(135, 8, $d->tim, 1, 1, '');
         $pdf->Cell(50, 8, "Status ", 1, 0, 'L');
         $pdf->Cell(135, 8, ($d->status == 1) ? 'Aktif' : 'Non-Aktif', 1, 1, '');
@@ -60,7 +60,7 @@ class Export extends CI_Controller {
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
         $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
-        $pdf->Cell(55, 8, "Tim", 1, 0, 'C');
+        $pdf->Cell(55, 8, "Team", 1, 0, 'C');
         $pdf->Cell(50, 8, "Email", 1, 0, 'C');
         $pdf->Cell(30, 8, "Telepon", 1, 0, 'C');
         $pdf->Cell(50, 8, "Alamat", 1, 0, 'C');
@@ -90,7 +90,7 @@ class Export extends CI_Controller {
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
         $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
-        $pdf->Cell(55, 8, "Tim", 1, 0, 'C');
+        $pdf->Cell(55, 8, "Team", 1, 0, 'C');
         $pdf->Cell(50, 8, "Email", 1, 0, 'C');
         $pdf->Cell(30, 8, "Telepon", 1, 0, 'C');
         $pdf->Cell(50, 8, "Alamat", 1, 0, 'C');
@@ -124,7 +124,7 @@ class Export extends CI_Controller {
             $pdf->Cell(135, 8, ': '.$user->nama , 0, 1, 'L');
 
             $pdf->SetFont('', '', 12);
-            $pdf->Cell(50, 8, 'Tim' , 0, 0, 'L');
+            $pdf->Cell(50, 8, 'Team' , 0, 0, 'L');
             $pdf->SetFont('', 'B', 12);
             $pdf->Cell(135, 8, ': '.$user->tim , 0, 1, 'L');
 
@@ -198,7 +198,7 @@ class Export extends CI_Controller {
         $pdf->Cell(135, 8, ': '.$d->nama , 0, 1, 'L');
 
         $pdf->SetFont('', '', 12);
-        $pdf->Cell(50, 8, 'Tim' , 0, 0, 'L');
+        $pdf->Cell(50, 8, 'Team' , 0, 0, 'L');
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(135, 8, ': '.$d->tim , 0, 1, 'L');
 
@@ -329,10 +329,8 @@ class Export extends CI_Controller {
 
     public function nilai($user_id) {
         $data = $this->m_app->getPenilaian($user_id)->row();
- 
-        $total = $data->n1 + $data->n2 + $data->n3 + $data->n4 + $data->n5 + $data->n6 + $data->n7 + $data->n8 + $data->n9;
-        if ($total != 0) {
-            $av = $total / 9;
+        if ($data->total > 0) {
+            $av = $data->total / 9;
         } else {
             $av = 0;
         }
@@ -387,7 +385,7 @@ class Export extends CI_Controller {
         $pdf->SetFont('', '', 12);
         $pdf->Cell(90, 8, "Nilai", 1, 0, 'C');
         $pdf->SetFont('', 'B', 12);
-        $pdf->Cell(90, 8, $total, 1, 1, 'C');
+        $pdf->Cell(90, 8, $data->total, 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         $pdf->Cell(90, 8, "Rata-rata", 1, 0, 'C');
         $pdf->SetFont('', 'B', 12);
@@ -488,9 +486,8 @@ class Export extends CI_Controller {
     }
 
     private function addPenilaian($pdf, $no, $d) {
-        $total = $d['n1'] + $d['n2'] + $d['n3'] + $d['n4'] + $d['n5'] + $d['n6'] + $d['n7'] + $d['n8'] + $d['n9'];
-        if ($total != 0) {
-            $av = $total / 9;
+        if ($d->total > 0) {
+            $av = $d->total / 9;
         } else {
             $av = 0;
         }

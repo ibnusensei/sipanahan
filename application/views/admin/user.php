@@ -46,7 +46,7 @@
                             <th class="border-top-0">#</th>
                             <th class="border-top-0">Nama</th>
                             <th class="border-top-0">Email/Telp</th>
-                            <th class="border-top-0">Tim</th>
+                            <th class="border-top-0">Team</th>
                             <th class="border-top-0">Status</th>
                             <th class="border-top-0">Aksi</th>
                         </tr>
@@ -170,9 +170,9 @@
 
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="">Tim</label>
+                                <label for="">Team</label>
                                 <select class="form-control" name="tim_id" required>
-                                    <option>Pilih Tim</option>
+                                    <option>Pilih Team</option>
                                     <?php foreach ($tim as $x => $d) : ?>
                                         <option value="<?= $d->id ?>"><?= $d->tim ?></option>
                                     <?php endforeach; ?>
