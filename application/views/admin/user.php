@@ -19,8 +19,15 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <a name="" id="" class="btn btn-success text-white mr-3" href="<?= site_url('export/'.$role[$level]) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Export</a>
-                    <a name="" id="" class="btn btn-warning mr-3" href="<?= site_url('bonus/'.$role[$level]) ?>" role="button"><i class="fa fa-dollar" aria-hidden="true"></i> Bonus</a>
+                    <?php if ($level == 3): ?>
+                    <a href="<?php echo site_url('export/penilaian'); ?>" >
+                        <button class="btn btn-info mr-1" style="color: #fafafa;">
+                            <i class="fa fa-chart-area"></i> Penilaian
+                        </button>
+                    </a>
+                    <?php endif; ?>
+                    <a name="" id="" class="btn btn-success text-white mr-1" href="<?= site_url('export/'.$role[$level]) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Export</a>
+                    <a name="" id="" class="btn btn-warning mr-1" href="<?= site_url('bonus/'.$role[$level]) ?>" role="button"><i class="fa fa-dollar" aria-hidden="true"></i> Bonus</a>
                     <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
                 </div>
                 <div class="col-md-6">
@@ -79,12 +86,12 @@
                                         </a>
                                         <?php if ($level == 3): ?>
                                         <a href="<?php echo site_url('export/prestasi/'.$data->id); ?>" >
-                                            <button class="btn btn-sm btn-info mr-1"  style="float:left;">
+                                            <button class="btn btn-sm btn-warning mr-1"  style="float:left;">
                                                 <i class="fa fa-chart-line" style="color: #fafafa;"></i>
                                             </button>
                                         </a>
                                         <a style="cursor: pointer;" data-toggle="modal" data-target="#nilai_<?=$data->id?>">
-                                            <button class="btn btn-sm btn-warning mr-1"  style="float:left;">
+                                            <button class="btn btn-sm btn-info mr-1"  style="float:left; color: #fafafa;">
                                                 <i class="fa fa-chart-area"></i>
                                             </button>
                                         </a>
@@ -460,6 +467,9 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="<?php echo site_url('export/nilai/'.$d->id); ?>"  class="btn btn-info mr-1" style="color: #fafafa;" >
+                       <i class="fa fa-print"></i> Cetak
+                    </a>
                 </form>
 			</div> 
 	      	<div class="modal-footer"> 

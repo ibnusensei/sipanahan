@@ -49,26 +49,28 @@ class Export extends CI_Controller {
         $tanggal = date('d-m-Y');
  
         $pdf = new \TCPDF();
-        $pdf->AddPage();
-        $this->head($pdf);
+        $pdf->AddPage('l');
+        $this->headl($pdf);
         $pdf->SetFont('', 'B', 20);
-        $pdf->Cell(185, 0, "Laporan Data Atlet - ".$tanggal, 0, 1, 'C');
+        $pdf->Cell(300, 0, "Laporan Data Atlet - ".$tanggal, 0, 1, 'C');
         $pdf->SetAutoPageBreak(true, 0);
  
         // Add Header
         $pdf->Ln(10);
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
-        $pdf->Cell(55, 8, "Nama", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Tim", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(55, 8, "Tim", 1, 0, 'C');
         $pdf->Cell(50, 8, "Email", 1, 0, 'C');
+        $pdf->Cell(30, 8, "Telepon", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Alamat", 1, 0, 'C');
         $pdf->Cell(35, 8, "Status", 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         foreach($data->result_array() as $x => $d) {
             $this->addUser($pdf, $x+1, $d);
         }
         $tanggal = date('d-m-Y');
-        $this->ttd($pdf);
+        $this->ttdl($pdf);
         $pdf->Output('Laporan Data Atlet - '.$tanggal.'.pdf'); 
     }
 
@@ -77,8 +79,8 @@ class Export extends CI_Controller {
         $tanggal = date('d-m-Y');
  
         $pdf = new \TCPDF();
-        $pdf->AddPage();
-        $this->head($pdf);
+        $pdf->AddPage('l');
+        $this->headl($pdf);
         $pdf->SetFont('', 'B', 20);
         $pdf->Cell(185, 0, "Laporan Data Pelatih - ".$tanggal, 0, 1, 'C');
         $pdf->SetAutoPageBreak(true, 0);
@@ -87,16 +89,18 @@ class Export extends CI_Controller {
         $pdf->Ln(10);
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
-        $pdf->Cell(55, 8, "Nama", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Tim", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(55, 8, "Tim", 1, 0, 'C');
         $pdf->Cell(50, 8, "Email", 1, 0, 'C');
+        $pdf->Cell(30, 8, "Telepon", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Alamat", 1, 0, 'C');
         $pdf->Cell(35, 8, "Status", 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         foreach($data->result_array() as $x => $d) {
             $this->addUser($pdf, $x+1, $d);
         }
         $tanggal = date('d-m-Y');
-        $this->ttd($pdf);
+        $this->ttdl($pdf);
         $pdf->Output('Laporan Data Pelatih - '.$tanggal.'.pdf'); 
     }
 
@@ -288,9 +292,121 @@ class Export extends CI_Controller {
         $pdf->Output('Laporan Data Alat.pdf'); 
     }
 
+    public function penilaian() {
+        $data = $this->m_app->getPenilaian();
+        $tanggal = date('d-m-Y');
+ 
+        $pdf = new \TCPDF();
+        $pdf->AddPage('l');
+        $this->headl($pdf);
+        $pdf->SetFont('', 'B', 20);
+        $pdf->Cell(300, 0, "Laporan Data Penilaian Atlet ", 0, 1, 'C');
+        $pdf->SetAutoPageBreak(true, 0);
+ 
+        // Add Header
+        $pdf->Ln(10);
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(10, 8, "No", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Stance", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Nocking", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Set Up", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Drawing", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Anchoring", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Holding", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Aiming", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Release", 1, 0, 'C');
+        $pdf->Cell(20, 8, "Follow Thr.", 1, 0, 'C');
+        $pdf->Cell(35, 8, "Nilai", 1, 1, 'C');
+        $pdf->SetFont('', '', 12);
+        foreach($data->result_array() as $x => $d) {
+            $this->addPenilaian($pdf, $x+1, $d);
+        }
+        $tanggal = date('d-m-Y');
+        $this->ttdl($pdf);
+        $pdf->Output('Laporan Data Penilaian Atlet.pdf'); 
+    }
+
+    public function nilai($user_id) {
+        $data = $this->m_app->getPenilaian($user_id)->row();
+ 
+        $total = $data->n1 + $data->n2 + $data->n3 + $data->n4 + $data->n5 + $data->n6 + $data->n7 + $data->n8 + $data->n9;
+        if ($total != 0) {
+            $av = $total / 9;
+        } else {
+            $av = 0;
+        }
+
+        $pdf = new \TCPDF();
+        $pdf->AddPage();
+        $this->head($pdf);
+        $pdf->SetFont('', 'B', 20);
+        $pdf->Cell(180, 0, "Laporan Data Penilaian Atlet ", 0, 1, 'C');
+        $pdf->SetAutoPageBreak(true, 0);
+ 
+        // Add Header
+        $pdf->Ln(10);
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(50, 8, "Nama", 0, 0, 'L');
+
+        $pdf->SetFont('', '', 12);
+        $pdf->Cell(50, 8, ": ".$data->nama, 0, 1, 'L');
+        $pdf->Ln(10);
+        $pdf->Cell(60, 8, "Stance", 0, 0, 'C');
+        $pdf->Cell(60, 8, "Nocking", 0, 0, 'C');
+        $pdf->Cell(60, 8, "Set Up", 0, 1, 'C');
+
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(60, 8, $data->n1, 1, 0, 'C');
+        $pdf->Cell(60, 8, $data->n2, 1, 0, 'C');
+        $pdf->Cell(60, 8, $data->n3, 1, 1, 'C');
+
+        $pdf->Ln(5);
+        $pdf->SetFont('', '', 12);
+        $pdf->Cell(60, 8, "Drawing", 0, 0, 'C');
+        $pdf->Cell(60, 8, "Anchoring", 0, 0, 'C');
+        $pdf->Cell(60, 8, "Holding", 0, 1, 'C');
+
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(60, 8, $data->n4, 1, 0, 'C');
+        $pdf->Cell(60, 8, $data->n5, 1, 0, 'C');
+        $pdf->Cell(60, 8, $data->n6, 1, 1, 'C');
+
+        $pdf->Ln(5);
+        $pdf->SetFont('', '', 12);
+        $pdf->Cell(60, 8, "Aiming", 0, 0, 'C');
+        $pdf->Cell(60, 8, "Release", 0, 0, 'C');
+        $pdf->Cell(60, 8, "Follow Through", 0, 1, 'C');
+
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(60, 8, $data->n7, 1, 0, 'C');
+        $pdf->Cell(60, 8, $data->n8, 1, 0, 'C');
+        $pdf->Cell(60, 8, $data->n9, 1, 1, 'C');
+
+        $pdf->Ln(5);
+        $pdf->SetFont('', '', 12);
+        $pdf->Cell(90, 8, "Nilai", 1, 0, 'C');
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(90, 8, $total, 1, 1, 'C');
+        $pdf->SetFont('', '', 12);
+        $pdf->Cell(90, 8, "Rata-rata", 1, 0, 'C');
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(90, 8, $av, 1, 1, 'C');
+        $pdf->SetFont('', '', 12);
+
+        $tanggal = date('d-m-Y');
+        $this->ttd($pdf);
+        $pdf->Output('Laporan Data Penilaian Atlet.pdf'); 
+    }
+
     private function head($pdf) {
         $pdf->Image(base_url('assets/kop.jpeg'), 0, 0, 200, 0, '', 'http://www.tcpdf.org', 'C', true, 300, '', false, false, 0, true, false, false);
         $pdf->Cell(185, 30, "", 0, 1, 'C');
+    }
+
+    private function headl($pdf) {
+        $pdf->Image(base_url('assets/kop.jpeg'), 0, 0, 250, 0, '', 'http://www.tcpdf.org', 'C', true, 300, '', false, false, 0, true, false, false);
+        $pdf->Cell(300, 50, "", 0, 1, 'C');
     }
 
     private function ttd($pdf){
@@ -306,12 +422,27 @@ class Export extends CI_Controller {
         $pdf->Cell(85, 8, 'Ketua Umum' , 0, 1, 'C');
     }
 
+    private function ttdl($pdf){
+        $pdf->Cell(135, 10, '' , 0, 1, 'L');
+        $pdf->Cell(200, 8, '' , 0, 0, 'C');
+        $pdf->Cell(85, 8, 'Banjarmasin, '. date('d-m-Y') , 0, 1, 'C');
+        $pdf->Cell(200, 8, '' , 0, 0, 'C');
+        $pdf->Cell(85, 8, 'Mengetahui ' , 0, 1, 'C');
+        $pdf->Cell(135, 15, '' , 0, 1, 'L');
+        $pdf->Cell(200, 8, '' , 0, 0, 'C');
+        $pdf->Cell(85, 8, 'Ir. H. Supian ST. MT' , 0, 1, 'C');
+        $pdf->Cell(200, 8, '' , 0, 0, 'C');
+        $pdf->Cell(85, 8, 'Ketua Umum' , 0, 1, 'C');
+    }
+
  
     private function addUser($pdf, $no, $d) {
         $pdf->Cell(10, 8, $no, 1, 0, 'C');
-        $pdf->Cell(55, 8, $d['nama'], 1, 0, '');
-        $pdf->Cell(35, 8, $d['tim'], 1, 0, 'C');
+        $pdf->Cell(50, 8, $d['nama'], 1, 0, '');
+        $pdf->Cell(55, 8, $d['tim'], 1, 0, 'C');
         $pdf->Cell(50, 8, $d['email'], 1, 0, 'C');
+        $pdf->Cell(30, 8, $d['telepon'], 1, 0, 'C');
+        $pdf->Cell(50, 8, $d['alamat'], 1, 0, 'C');
         $pdf->Cell(35, 8, ($d['status'] == 1) ? 'Aktif' : 'Non-Aktif', 1, 1, 'L');
     }
 
@@ -354,6 +485,28 @@ class Export extends CI_Controller {
         $pdf->Cell(35, 8, $d['nama'], 1, 0, 'C');
         $pdf->Cell(35, 8, $jenis[$d['jenis']], 1, 0, 'C');
         $pdf->Cell(35, 8, $kondisi[$d['kondisi']], 1, 1, 'L');
+    }
+
+    private function addPenilaian($pdf, $no, $d) {
+        $total = $d['n1'] + $d['n2'] + $d['n3'] + $d['n4'] + $d['n5'] + $d['n6'] + $d['n7'] + $d['n8'] + $d['n9'];
+        if ($total != 0) {
+            $av = $total / 9;
+        } else {
+            $av = 0;
+        }
+
+        $pdf->Cell(10, 8, $no, 1, 0, 'C');
+        $pdf->Cell(50, 8, $d['nama'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n1'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n2'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n3'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n4'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n5'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n6'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n7'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n8'], 1, 0, 'C');
+        $pdf->Cell(20, 8, $d['n9'], 1, 0, 'C');
+        $pdf->Cell(35, 8, $av, 1, 1, 'L');
     }
 
 }
