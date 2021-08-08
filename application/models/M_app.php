@@ -278,7 +278,8 @@ class M_app extends CI_Model {
     function getPrestasiPerTahun()
     {
         $this->db->order_by('tanggal','desc');
-        $this->db->group_by('MONTH(tanggal), YEAR(tanggal)');
+        // $this->db->group_by('MONTH(tanggal), YEAR(tanggal)');
+        $this->db->group_by('YEAR(tanggal)');
         $this->db->select('tanggal');
         $this->db->select("count(*) as total");
         return $this->db->from('prestasi')

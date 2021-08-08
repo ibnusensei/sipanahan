@@ -102,7 +102,7 @@
     $jumlah=null;
     foreach ($prestasiPerTahun as $item)
     {
-        $t = date('F Y', strtotime($item->tanggal));
+        $t = date('Y', strtotime($item->tanggal));
         $tanggal .= "'$t'". ", ";
 
         $jum = $item->total;
@@ -118,7 +118,7 @@
         data: {
             labels: [<?php echo $tanggal; ?>],
             datasets: [{
-                label:'Data Prestasi Perbulan ',
+                label:'Data Prestasi Pertahun ',
                 backgroundColor: ['#ffadad', '#ffd6a5', '#fdffb6','#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff'],
                 borderColor: ['rgb(255, 99, 132)'],
                 data: [<?php echo $jumlah; ?>]
@@ -129,7 +129,8 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        max:20
                     }
                 }]
             }
