@@ -8,6 +8,7 @@ class User extends CI_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->model(['m_app']);
+        
     }
 
     public function index() {
@@ -38,6 +39,13 @@ class User extends CI_Controller {
     {
         check_admin();
         if ($this->input->post()) {
+            $username = $this->input->post('username');
+            $check = $this->m_app->checkUser($username);
+            if ($check > 0) {
+                $this->session->set_flashdata('error', 'Username Telah Digunakan');
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                
             $file =  $_FILES["image"]["name"];
             $upload = $this->m_app->uploadImage($file, 'user');
             if($upload == 'error') {
@@ -48,13 +56,14 @@ class User extends CI_Controller {
                 $this->session->set_flashdata('success', 'Proses Berhasil');
             }
 
+
             $data = [
                 'nama'      => $this->input->post('nama'),
                 'email'     => $this->input->post('email'),
                 'telepon'   => $this->input->post('telepon'),
                 'alamat'    => $this->input->post('alamat'),
-                'username'  => $this->input->post('username'),
-                'password'  => $this->bcrypt->hash($this->input->post('username')),
+                'username'  => $username,
+                'password'  => $this->bcrypt->hash($username),
                 'tim_id'    => $this->input->post('tim_id'),
                 'level'     => $this->input->post('level'),
                 'status'    => 1,
@@ -63,9 +72,13 @@ class User extends CI_Controller {
 
             $data = $this->security->xss_clean($data);
             $this->m_app->store('users', $data);
+
+            $user = $this->m_app->getUser($username);
+            $this->m_app->qrcode($user->id);
             
             $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
+            }
         }
 
     }
@@ -74,15 +87,28 @@ class User extends CI_Controller {
     {
         check_admin();
         if ($this->input->post()) {
-            $file =  $_FILES["image"]["name"];
-            $upload = $this->m_app->uploadImage($file, 'user');
-            if($upload == 'error') {
-                $image = 'assets/img/default-user.svg';
-                $this->session->set_flashdata('error', 'Gagal Mengubah Data');
+            $d = $this->m_app->dataUser($this->input->post('id'));
+            $username = $this->input->post('username');
+            $check = $this->m_app->checkUser($username, $d->id);
+            if ($check > 0) {
+                $this->session->set_flashdata('error', 'Username Telah Digunakan');
+                redirect($_SERVER['HTTP_REFERER']);
             } else {
-                $image = $upload;
-                $this->session->set_flashdata('success', 'Proses Berhasil');
+
+            $file =  $_FILES["image"]["name"];
+            if (empty($file)) {
+                $image = $d->image;
+            } else {
+                $upload = $this->m_app->uploadImage($file, 'user');
+                if($upload == 'error') {
+                    $image = 'assets/img/default-user.svg';
+                    $this->session->set_flashdata('error', 'Gagal Mengubah Data');
+                } else {
+                    $image = $upload;
+                    $this->session->set_flashdata('success', 'Proses Berhasil');
+                }
             }
+            
 
             $data = [
                 'nama'      => $this->input->post('nama'),
@@ -99,8 +125,13 @@ class User extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $id   = $this->input->post('id');
             $this->m_app->update('users', $data, $id);
+
+            delete_files('assets/img/qrcode/'.$d->id.'.png');
+            $user = $this->m_app->getUser($username);
+            $this->m_app->qrcode($user->id);
             
             redirect($_SERVER['HTTP_REFERER']);
+            }
         }
 
     }
@@ -144,21 +175,35 @@ class User extends CI_Controller {
     public function update_profil()
     {
         if ($this->input->post()) {
-            $file =  $_FILES["image"]["name"];
-            $upload = $this->m_app->uploadImage($file, 'user');
-            if($upload == 'error') {
-                $image = 'assets/img/default-user.svg';
-                $this->session->set_flashdata('error', 'Gagal Mengubah Data');
+            $d = $this->m_app->dataUser($this->session->id);
+            $username = $this->input->post('username');
+            $check = $this->m_app->checkUser($username, $d->id);
+            if ($check > 0) {
+                $this->session->set_flashdata('error', 'Username Telah Digunakan');
+                redirect($_SERVER['HTTP_REFERER']);
             } else {
-                $image = $upload;
-                $this->session->set_flashdata('success', 'Proses Berhasil');
+
+            $file =  $_FILES["image"]["name"];
+            if (empty($file)) {
+                $image = $d->image;
+            } else {
+                $upload = $this->m_app->uploadImage($file, 'user');
+                if($upload == 'error') {
+                    $image = 'assets/img/default-user.svg';
+                    $this->session->set_flashdata('error', 'Gagal Mengubah Data');
+                } else {
+                    $image = $upload;
+                    $this->session->set_flashdata('success', 'Proses Berhasil');
+                }
             }
 
             $data = [
                 'nama'      => $this->input->post('nama'),
                 'email'     => $this->input->post('email'),
                 'username'  => $this->input->post('username'),
-                'image'     => $image
+                'image'     => $image,
+                'telepon'   => $this->input->post('telepon'),
+                'alamat'    => $this->input->post('alamat'),
             ];
 
             if ($this->input->post('password') != null) {
@@ -170,6 +215,7 @@ class User extends CI_Controller {
             $this->m_app->update('users', $data, $id);
             
             redirect($_SERVER['HTTP_REFERER']);
+            }
         }
 
     }

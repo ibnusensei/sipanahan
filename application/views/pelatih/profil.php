@@ -33,6 +33,16 @@
                                 <label for="email">Email</label>
                                     <input type="email" class="form-control" name="email" placeholder="Email" value="<?= $user->email ?>">
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="telepon">Telepon</label>
+                                    <input type="text" class="form-control" name="telepon" placeholder="Telepon" value="<?= $user->telepon ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="<?= $user->alamat ?>">
+                            </div>
+                            
                             <div class="form-group">
                                 <label for="username">Username</label>
                                     <input type="text" class="form-control" id="username" name="username" placeholder="Username" maxlength="12" value="<?= $user->username ?>">
@@ -48,7 +58,7 @@
                             <div class="box-gambar"><img src="<?=base_url($user->image)?>" id="blah" alt="Your Image" style="height:200px;"></div>
                             <div class="form-group mt-3">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="image" id="image" onChange="readURL(this);" value="<?=$user->image?>" required>
+                                    <input type="file" class="custom-file-input" name="image" id="image" onChange="readURL(this);" value="<?=$user->image?>">
                                     <label class="custom-file-label" for="image">Choose file</label>
                                 </div>
                             </div>

@@ -283,10 +283,10 @@
                         </div>
 
                         <div class="col-xs-12">
-                        <div class="box-gambar"><img src="<?=base_url($d->image)?>" id="blah_<?= $d->id ?>" alt="Your Image" style="height:200px; width:100%"></div>
+                        <div class="box-gambar"><img src="<?=base_url($d->image)?>" id="blah_<?= $d->id ?>" alt="Your Image" style="height:100%; width:100%"></div>
 						<div class="form-group mt-3">
 		                    <div class="custom-file">
-		                      	<input type="file" class="custom-file-input" name="image" id="image" onChange="readURL<?=$d->id?>(this);" value="<?=$d->image?>" required>
+		                      	<input type="file" class="custom-file-input" name="image" id="image" onChange="readURL<?=$d->id?>(this);" value="<?=$d->image?>">
 		                      	<label class="custom-file-label" for="image">Choose file</label>
 		                    </div>
 		                </div>

@@ -12,12 +12,16 @@ class Export extends CI_Controller {
 
     public function user($user_id) {
         $d = $this->m_app->getPengguna($user_id)->row();
+        if (!file_exists('assets/img/qrcode/'.$d->id.'.png')) {
+            $this->m_app->qrcode($d->id);
+        }
+        
         $tanggal = date('d-m-Y');
  
         $pdf = new \TCPDF();
         $pdf->AddPage();
         $pdf->SetFont('', 'B', 20);
-        $pdf->Cell(185, 8, ($d->level == 2) ? 'Kartu Tanda Pelatih' : 'Kartu Tanda Atlet', 1, 1, 'C');
+        $pdf->Cell(185, 8, ($d->level == 2) ? 'Kartu Tanda Pelatih' : 'Kartu Tanda Atlet', 0, 1, 'C');
         $pdf->Cell(185, 90, '', 0, 1, 'C');
         $pdf->SetAutoPageBreak(true, 0);
 
@@ -29,15 +33,22 @@ class Export extends CI_Controller {
         
 
         $pdf->SetFont('', 'B', 12);
-        $pdf->Image(base_url($d->image), 70, 25, 75, 75, '', 'http://www.tcpdf.org', '', true, 100, '', false, false, 0, false, false, false);
+        $pdf->Image(base_url($d->image), 10, 25, 75, 75, '', 'http://www.tcpdf.org', '', true, 100, '', false, false, 0, false, false, false);
+
+        $pdf->Image(base_url('assets/img/qrcode/'.$d->id.'.png'), 140, 35, 50, 50, '', 'http://www.tcpdf.org', '', true, 100, '', false, false, 0, false, false, false);
+
         $pdf->Cell(185, 8, $d->nama, 1, 1, 'C');
         $pdf->SetFont('', '', 12);
-        $pdf->Cell(50, 8, "Email ", 1, 0, 'L');
-        $pdf->Cell(135, 8, $d->email, 1, 1, '');
-        $pdf->Cell(50, 8, "Team ", 1, 0, 'L');
-        $pdf->Cell(135, 8, $d->tim, 1, 1, '');
-        $pdf->Cell(50, 8, "Status ", 1, 0, 'L');
-        $pdf->Cell(135, 8, ($d->status == 1) ? 'Aktif' : 'Non-Aktif', 1, 1, '');
+        $pdf->Cell(45, 8, "Email ", 1, 0, 'L');
+        $pdf->Cell(140, 8, $d->email, 1, 1, '');
+        $pdf->Cell(45, 8, "Telepon ", 1, 0, 'L');
+        $pdf->Cell(140, 8, $d->telepon, 1, 1, '');
+        $pdf->Cell(45, 8, "Alamat ", 1, 0, 'L');
+        $pdf->Cell(140, 8, $d->alamat, 1, 1, '');
+        $pdf->Cell(45, 8, "Team ", 1, 0, 'L');
+        $pdf->Cell(140, 8, $d->tim, 1, 1, '');
+        $pdf->Cell(45, 8, "Status ", 1, 0, 'L');
+        $pdf->Cell(140, 8, ($d->status == 1) ? 'Aktif' : 'Non-Aktif', 1, 1, '');
         $pdf->SetFont('', '', 12);
 
         $tanggal = date('d-m-Y');
@@ -486,8 +497,8 @@ class Export extends CI_Controller {
     }
 
     private function addPenilaian($pdf, $no, $d) {
-        if ($d->total > 0) {
-            $av = $d->total / 9;
+        if ($d['total'] > 0) {
+            $av = $d['total'] / 9;
         } else {
             $av = 0;
         }
