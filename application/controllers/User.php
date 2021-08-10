@@ -104,6 +104,7 @@ class User extends CI_Controller {
                     $image = 'assets/img/default-user.svg';
                     $this->session->set_flashdata('error', 'Gagal Mengubah Data');
                 } else {
+                    delete_files($d->image);
                     $image = $upload;
                     $this->session->set_flashdata('success', 'Proses Berhasil');
                 }
@@ -189,9 +190,10 @@ class User extends CI_Controller {
             } else {
                 $upload = $this->m_app->uploadImage($file, 'user');
                 if($upload == 'error') {
-                    $image = 'assets/img/default-user.svg';
+                    $image = $d->image;
                     $this->session->set_flashdata('error', 'Gagal Mengubah Data');
                 } else {
+                    delete_files($d->image);
                     $image = $upload;
                     $this->session->set_flashdata('success', 'Proses Berhasil');
                 }
@@ -213,6 +215,10 @@ class User extends CI_Controller {
             $data = $this->security->xss_clean($data);
             $id   = $this->input->post('id');
             $this->m_app->update('users', $data, $id);
+            
+            delete_files('assets/img/qrcode/'.$d->id.'.png');
+            $user = $this->m_app->getUser($username);
+            $this->m_app->qrcode($user->id);
             
             redirect($_SERVER['HTTP_REFERER']);
             }
