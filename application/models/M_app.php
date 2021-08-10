@@ -5,6 +5,21 @@ class M_app extends CI_Model {
         parent::__construct();
     }
 
+    function checkUser($var, $id = null) {
+        if ($id != null) {
+            $this->db->where_not_in('id', $id);
+        }
+    	$this->db->where('username', $var);
+    	return $this->db->from('users')->count_all_results();
+    }
+
+    function dataUser($var) {
+        $this->db->select('users.*, tim.id AS tim_id, tim.tim');
+    	$this->db->where('users.id', $var);
+        $this->db->join('tim', 'tim.id = users.tim_id');
+    	return $this->db->get('users')->row();
+    }
+
     function getUser($var) {
     	$this->db->where('username', $var);
         $this->db->where('status', 1);
@@ -297,6 +312,30 @@ class M_app extends CI_Model {
         $this->db->order_by('total', 'DESC');
         $this->db->join('users', 'users.id = penilaian.user_id');
     	return $this->db->get();
+    }
+
+    function qrcode($id) {
+        $this->load->library('ciqrcode');
+        $config['cacheable']    = true; //boolean, the default is true
+        $config['cachedir']     = './assets/'; //string, the default is application/cache/
+        $config['errorlog']     = './assets/'; //string, the default is application/logs/
+        $config['imagedir']     = './assets/img/qrcode/'; //direktori penyimpanan qr code
+        $config['quality']      = true; //boolean, the default is true
+        $config['size']         = '1024'; //interger, the default is 1024
+        $config['black']        = array(224,255,255); // array, default is array(255,255,255)
+        $config['white']        = array(70,130,180); // array, default is array(0,0,0)
+        $this->ciqrcode->initialize($config);
+ 
+        $qrcode= $id.'.png'; //buat name dari qr code sesuai dengan nim
+ 
+        $user = $this->dataUser($id);
+        $level =  ['', 'Admin', 'Pelatih', 'Atlet'];
+        $text = 'Nama '.$level[$user->level].' : '.$user->nama.', Tim : '.$user->tim;
+        $params['data'] = $text; //data yang akan di jadikan QR CODE
+        $params['level'] = 'H'; //H=High
+        $params['size'] = 10;
+        $params['savename'] = FCPATH.$config['imagedir'].$qrcode; //simpan image QR CODE ke folder assets/images/
+        return $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
     }
 
 }
