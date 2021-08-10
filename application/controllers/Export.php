@@ -486,8 +486,8 @@ class Export extends CI_Controller {
     }
 
     private function addPenilaian($pdf, $no, $d) {
-        if ($d->total > 0) {
-            $av = $d->total / 9;
+        if ($d['total'] > 0) {
+            $av = $d['total'] / 9;
         } else {
             $av = 0;
         }
