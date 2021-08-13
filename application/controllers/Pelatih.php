@@ -13,20 +13,22 @@ class Pelatih extends CI_Controller {
 
     public function index() {
         $id = $this->session->id;
+        $d = $this->m_app->dataUser($this->session->id);
         $query = $this->m_app->getBonus(null, null, $id);
         $bonus = 0;
-        foreach ($query->result() as $d) {
-            $bonus += $d->jumlah;
+        foreach ($query->result() as $q) {
+            $bonus += $q->jumlah;
         }
         $var = [
             'page'  =>  'pelatih/dashboard',
             'title' =>  'Dashboard',
             'user'  =>  $this->m_app->getAnggota(),
-            'prestasi'  =>  $this->m_app->getPrestasi(null, $id),
+            'prestasi'  =>  $this->m_app->getPrestasi(null, null, $d->tim_id),
             'latihan'   =>  $this->m_app->getLatihan(),
             'melatih'   =>  $this->m_app->getLatihan(null, $id),
             'kehadiran' =>  $this->m_app->getKehadiran(null, $id),
-            'bonus'     =>  $bonus
+            'bonus'     =>  $bonus,
+            'tim'       =>  $d->tim
         ];
 
         $this->load->view('layout/pelatih', $var);
@@ -70,10 +72,11 @@ class Pelatih extends CI_Controller {
     }
 
     public function prestasi() {
+        $d = $this->m_app->dataUser($this->session->id);
         $var    = [
             'page'  =>  'pelatih/prestasi',
-            'title' =>  'Prestasi',
-            'prestasi'   =>  $this->m_app->getPrestasi(null, $this->session->id)->result(),
+            'title' =>  'Prestasi Tim '.$d->tim,
+            'prestasi'   =>  $this->m_app->getPrestasi(null, null, $d->tim_id)->result(),
             'user'  =>  $this->m_app->getAnggota()->result(),
 
             // Tambahan

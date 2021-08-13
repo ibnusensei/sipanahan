@@ -2,9 +2,9 @@
 <!-- Three charts -->
 <!-- ============================================================== -->
 <div class="row justify-content-center">
-    <div class="col-lg-4 col-md-12">
+    <div class="col-lg-6 col-md-12">
         <div class="white-box analytics-info">
-            <h3 class="box-title">Total Prestasi</h3>
+            <h3 class="box-title">Total Prestasi Team <?= $tim ?></h3>
             <ul class="list-inline two-part d-flex align-items-center mb-0">
                 <li>
                     <div id="sparklinedash"><canvas width="67" height="30"
@@ -15,7 +15,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-lg-4 col-md-12">
+    <div class="col-lg-4 col-md-12 d-none">
         <div class="white-box analytics-info">
             <h3 class="box-title">Total Melatih</h3>
             <ul class="list-inline two-part d-flex align-items-center mb-0">
@@ -28,9 +28,9 @@
             </ul>
         </div>
     </div>
-    <div class="col-lg-4 col-md-12">
+    <div class="col-lg-6 col-md-12">
         <div class="white-box analytics-info">
-            <h3 class="box-title">Bonus</h3>
+            <h3 class="box-title">Bonus Pelatih</h3>
             <ul class="list-inline two-part d-flex align-items-center mb-0">
                 <li>
                     <div id="sparklinedash3"><canvas width="67" height="30"

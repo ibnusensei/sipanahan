@@ -190,7 +190,7 @@ class M_app extends CI_Model {
     }
 
     // Pertandingan 
-    function getPrestasi($var = null, $user_id = null) {
+    function getPrestasi($var = null, $user_id = null, $tim = null) {
         $this->db->select('prestasi.*, users.id AS user_id, users.nama, tim.tim');
         $this->db->from('prestasi');
         if ($var != null) {
@@ -198,6 +198,10 @@ class M_app extends CI_Model {
         }
         if ($user_id != null) {
             $this->db->where('prestasi.user_id', $user_id);
+        }
+
+        if ($tim != null) {
+            $this->db->where('users.tim_id', $tim);
         }
 
         if (!empty($_GET['a']) && !empty($_GET['b'])) {
