@@ -164,6 +164,32 @@ class Export extends CI_Controller {
         $pdf->Output('Laporan Data Prestasi.pdf'); 
     }
 
+    public function prestasitim() {
+        
+        $data = $this->m_app->getTeam();
+ 
+        $pdf = new \TCPDF();
+        $pdf->AddPage();
+        $this->head($pdf);
+        $pdf->SetFont('', 'B', 20);
+        $pdf->Cell(185, 0, "Laporan Data Prestasi Tim", 0, 1, 'C');
+        $pdf->SetAutoPageBreak(true, 0);
+        // Add Header
+        $pdf->Ln(10);
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(10, 8, "No", 1, 0, 'C');
+        $pdf->Cell(55, 8, "Tim", 1, 0, 'C');
+        $pdf->Cell(85, 8, "Alamat", 1, 0, 'C');
+        $pdf->Cell(35, 8, "Total", 1, 1, 'C');
+        $pdf->SetFont('', '', 12);
+        foreach($data->result_array() as $x => $d) {
+            $this->addPrestasiTim($pdf, $x+1, $d);
+        }
+        
+        $this->ttd($pdf);
+        $pdf->Output('Laporan Data Prestasi Tim.pdf'); 
+    }
+
     public function pertandingan($user_id = null) {
         
         $data = $this->m_app->getPertandingan();
@@ -250,27 +276,28 @@ class Export extends CI_Controller {
         $data = $this->m_app->getBonus($_GET['role']);
  
         $pdf = new \TCPDF();
-        $pdf->AddPage();
+        $pdf->AddPage('l');
 
-        $this->head($pdf);
+        $this->headl($pdf);
 
         $pdf->SetFont('', 'B', 20);
-        $pdf->Cell(185, 0, "Laporan Bonus", 0, 1, 'C');
+        $pdf->Cell(300, 0, "Laporan Bonus", 0, 1, 'C');
         $pdf->SetAutoPageBreak(true, 0);
         // Add Header
         $pdf->Ln(10);
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Tanggal", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Penerima", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Nominal", 1, 0, 'C');
+        $pdf->Cell(30, 8, "Tanggal", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Penerima", 1, 0, 'C');
+        $pdf->Cell(55, 8, "Tim", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Nominal", 1, 0, 'C');
         $pdf->Cell(75, 8, "Bonus", 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         foreach($data->result_array() as $x => $d) {
             $this->addBonus($pdf, $x+1, $d);
         }
         
-        $this->ttd($pdf);
+        $this->ttdl($pdf);
         $pdf->Output('Laporan Data Prestasi.pdf'); 
     }
 
@@ -290,10 +317,11 @@ class Export extends CI_Controller {
         $pdf->Ln(10);
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
-        $pdf->Cell(75, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
         $pdf->Cell(35, 8, "Pemilik", 1, 0, 'C');
+        $pdf->Cell(45, 8, "Tim", 1, 0, 'C');
         $pdf->Cell(35, 8, "Jenis", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Kondisi", 1, 1, 'C');
+        $pdf->Cell(20, 8, "Kondisi", 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         foreach($data->result_array() as $x => $d) {
             $this->addAlat($pdf, $x+1, $d);
@@ -465,6 +493,15 @@ class Export extends CI_Controller {
         $pdf->Cell(35, 8, date($d['tanggal']), 1, 1, 'L');
     }
 
+    private function addPrestasiTim($pdf, $no, $d) {
+        $total  = $this->m_app->getPrestasiTim($d['id'])->row()->total;
+
+        $pdf->Cell(10, 8, $no, 1, 0, 'C');
+        $pdf->Cell(55, 8, $d['tim'], 1, 0, '');
+        $pdf->Cell(85, 8, $d['lokasi'], 1, 0, 'C');
+        $pdf->Cell(35, 8, $total, 1, 1, 'C');
+    }
+
     private function addPertandingan($pdf, $no, $d) {
         $tingkat = ['Kecamatan', 'Kabupaten / Kota', 'Provinsi', 'Nasional'];
 
@@ -479,9 +516,10 @@ class Export extends CI_Controller {
         $tingkat = ['Kecamatan', 'Kabupaten / Kota', 'Provinsi', 'Nasional'];
 
         $pdf->Cell(10, 8, $no, 1, 0, 'C');
-        $pdf->Cell(35, 8, date($d['tanggal']), 1, 0, '');
-        $pdf->Cell(35, 8, $d['nama'], 1, 0, 'C');
-        $pdf->Cell(35, 8, $d['jumlah'], 1, 0, 'C');
+        $pdf->Cell(30, 8, date($d['tanggal']), 1, 0, '');
+        $pdf->Cell(50, 8, $d['nama'], 1, 0, 'C');
+        $pdf->Cell(55, 8, $d['tim'], 1, 0, 'C');
+        $pdf->Cell(50, 8, $d['jumlah'], 1, 0, 'C');
         $pdf->Cell(75, 8, $d['bonus'], 1, 1, 'L');
     }
 
@@ -490,10 +528,11 @@ class Export extends CI_Controller {
         $jenis   =  ['', 'Busur', 'Anak Panah', 'Target'];
 
         $pdf->Cell(10, 8, $no, 1, 0, 'C');
-        $pdf->Cell(75, 8, $d['alat'], 1, 0, '');
+        $pdf->Cell(50, 8, $d['alat'], 1, 0, '');
         $pdf->Cell(35, 8, $d['nama'], 1, 0, 'C');
+        $pdf->Cell(45, 8, $d['tim'], 1, 0, 'C');
         $pdf->Cell(35, 8, $jenis[$d['jenis']], 1, 0, 'C');
-        $pdf->Cell(35, 8, $kondisi[$d['kondisi']], 1, 1, 'L');
+        $pdf->Cell(20, 8, $kondisi[$d['kondisi']], 1, 1, 'L');
     }
 
     private function addPenilaian($pdf, $no, $d) {

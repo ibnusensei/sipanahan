@@ -38,12 +38,17 @@ class M_app extends CI_Model {
     }
 
     // Anggota 
-    function getAnggota($var = null) {
+    function getAnggota($var = null, $tim = null) {
         $this->db->select('users.*, tim.id AS tim_id, tim.tim');
         $this->db->from('users');
         if ($var != null) {
             $this->db->where('users.id', $var);
         }
+
+        if ($tim != null) {
+            $this->db->where('users.tim_id', $tim);
+        }
+
         if (!empty($_GET['search'])) {
             $this->db->like('users.nama', $_GET['search']);
             $this->db->or_like('users.email', $_GET['search']);
@@ -85,9 +90,25 @@ class M_app extends CI_Model {
     	return $this->db->get('tim');
     }
 
+    function getPrestasiTim($var = null) {
+        $this->db->select('prestasi.*, users.id AS user_id, tim.id AS tim_id, ');
+
+        $this->db->join('users', 'users.id = prestasi.user_id');
+        $this->db->join('tim', 'tim.id = users.tim_id');
+        
+        if ($var != null) {
+            $this->db->where('tim_id', $var);
+        }
+
+        $this->db->select("count(*) as total");
+
+        $this->db->order_by('id', 'DESC');
+    	return $this->db->get('prestasi');
+    }
+
     // Alat 
     function getAlat($var = null) {
-        $this->db->select('alat.*, users.id AS user_id, users.nama');
+        $this->db->select('alat.*, users.id AS user_id, users.nama, tim.tim');
         $this->db->from('alat');
         if ($var != null) {
             $this->db->where('alat.id', $var);
@@ -108,6 +129,7 @@ class M_app extends CI_Model {
 
         $this->db->order_by('id', 'DESC');
         $this->db->join('users', 'users.id = alat.user_id');
+        $this->db->join('tim', 'tim.id = users.tim_id');
     	return $this->db->get();
     }
 
@@ -203,7 +225,7 @@ class M_app extends CI_Model {
 
     // Bonus 
     function getBonus($role = null, $var = null, $user_id = null) {
-        $this->db->select('bonus.*, users.id AS user_id, users.nama, users.level' );
+        $this->db->select('bonus.*, users.id AS user_id, users.nama, users.level, tim.id AS tim_id, tim.tim' );
         $this->db->from('bonus');
         if ($var != null) {
             $this->db->where('bonus.id', $var);
@@ -219,6 +241,7 @@ class M_app extends CI_Model {
 
         $this->db->order_by('id', 'DESC');
         $this->db->join('users', 'users.id = bonus.user_id');
+        $this->db->join('tim', 'tim.id = users.tim_id');
         if ($role != null) {
             $this->db->where('users.level', $role);
         }
