@@ -10,7 +10,7 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <a name="" id="" class="btn btn-success text-white mr-3" href="<?= site_url('export/prestasi/'.$this->session->id) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Export</a>
+                    <a name="" id="" class="btn btn-success text-white mr-3 d-none" href="<?= site_url('export/prestasi/'.$this->session->id) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Export</a>
                 </div>
             </div>
             
@@ -20,6 +20,7 @@
                         <tr>
                             <th class="border-top-0">#</th>
                             <th class="border-top-0">Tanggal</th>
+                            <th class="border-top-0">Nama</th>
                             <th class="border-top-0">Prestasi</th>
                             <th class="border-top-0">Tingkat</th>
                             <th>Aksi</th>
@@ -30,6 +31,7 @@
                         <tr>
                             <td><?= $x+1 ?></td>
                             <td><?= longdate_indo($data->tanggal) ?></td>
+                            <td><?= $data->nama ?></td>
                             <td><?= $data->prestasi ?></td>
                             <td><?= $tingkat[$data->tingkat - 1] ?></td>
                             <td>
