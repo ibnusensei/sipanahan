@@ -139,7 +139,6 @@ class User extends CI_Controller {
 
     public function penilaian()
     {
-        check_admin();
         if ($this->input->post()) {
             $data = [
                 'user_id'   => $this->input->post('user_id'),

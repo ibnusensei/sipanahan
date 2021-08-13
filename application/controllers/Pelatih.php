@@ -123,4 +123,16 @@ class Pelatih extends CI_Controller {
 
     }
 
+    public function penilaian() {
+        $d = $this->m_app->dataUser($this->session->id);
+        $var    = [
+            'page'  =>  'pelatih/user',
+            'title' =>  'Atlet Tim '.$d->tim,
+            'level' =>  3,
+            'user'  =>  $this->m_app->getAnggota(null, $d->tim_id)->result(),
+            'tim'   =>  $this->m_app->getTeam()->result(),
+        ];
+        $this->load->view('layout/pelatih', $var);
+    }
+
 }

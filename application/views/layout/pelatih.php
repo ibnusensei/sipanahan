@@ -31,6 +31,8 @@
     <link href="<?= base_url('assets/') ?>css/style.css" rel="stylesheet">
     <link href="<?= base_url('assets/') ?>css/style.min.css" rel="stylesheet">
 
+    
+    <script src="<?= base_url('assets/') ?>chart/Chart.js"></script>
 </head>
 
 <body>
@@ -141,6 +143,13 @@
                                 aria-expanded="false">
                                 <i class="fa fa-clipboard-list" aria-hidden="true"></i>
                                 <span class="hide-menu">Latihan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('pelatih/penilaian') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-clipboard-list" aria-hidden="true"></i>
+                                <span class="hide-menu">Penilaian</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
