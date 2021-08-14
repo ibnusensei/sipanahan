@@ -23,7 +23,7 @@
                             <th class="border-top-0">Nama</th>
                             <th class="border-top-0">Prestasi</th>
                             <th class="border-top-0">Tingkat</th>
-                            <th>Aksi</th>
+                            <th class="d-none">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                             <td><?= $data->nama ?></td>
                             <td><?= $data->prestasi ?></td>
                             <td><?= $tingkat[$data->tingkat - 1] ?></td>
-                            <td>
+                            <td class="d-none">
                                 <a href="<?php echo site_url('export/surat_prestasi/'.$data->id); ?>" >
                                     <button class="btn btn-sm btn-success mr-1" style="float:left;">
                                         <i class="fa fa-file" style="color: #fafafa;"></i>

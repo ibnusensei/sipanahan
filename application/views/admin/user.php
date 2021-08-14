@@ -79,12 +79,14 @@
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                         </a>    
+                                        
+                                        <?php if ($level == 3): ?>
+
                                         <a href="<?php echo site_url('export/user/'.$data->id); ?>" >
                                             <button class="btn btn-sm btn-success mr-1" style="float:left;">
                                                 <i class="fa fa-file" style="color: #fafafa;"></i>
                                             </button>
                                         </a>
-                                        <?php if ($level == 3): ?>
                                         <a href="<?php echo site_url('export/prestasi/'.$data->id); ?>" >
                                             <button class="btn btn-sm btn-warning mr-1"  style="float:left;">
                                                 <i class="fa fa-chart-line" style="color: #fafafa;"></i>

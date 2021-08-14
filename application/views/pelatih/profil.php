@@ -10,7 +10,7 @@
             <h3 class="box-title mb-0"><?= $user->nama ?></h3>
             <p class="text-muted text-sm"><?= $user->tim ?></p>
             <p class="text-capitalize badge badge-primary"></p>
-            <a name="" id="" class="btn btn-warning btn-block" href="<?= site_url('export/user/'.$this->session->id)?>" role="button">Cetak Kartu</a>
+            <a name="" id="" class="btn btn-warning btn-block d-none" href="<?= site_url('export/user/'.$this->session->id)?>" role="button">Cetak Kartu</a>
         </div>
     </div>
 

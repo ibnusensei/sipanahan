@@ -334,16 +334,17 @@ class Export extends CI_Controller {
         $this->head($pdf);
 
         $pdf->SetFont('', 'B', 20);
-        $pdf->Cell(185, 0, "Laporan Alat", 0, 1, 'C');
+        $pdf->Cell(185, 0, "Laporan Alat Atlet", 0, 1, 'C');
         $pdf->SetAutoPageBreak(true, 0);
         // Add Header
         $pdf->Ln(10);
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
-        $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(35, 8, "Nama", 1, 0, 'C');
         $pdf->Cell(35, 8, "Pemilik", 1, 0, 'C');
         $pdf->Cell(45, 8, "Tim", 1, 0, 'C');
         $pdf->Cell(35, 8, "Jenis", 1, 0, 'C');
+        $pdf->Cell(15, 8, "Qty", 1, 0, 'C');
         $pdf->Cell(20, 8, "Kondisi", 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         foreach($data->result_array() as $x => $d) {
@@ -369,7 +370,7 @@ class Export extends CI_Controller {
         $pdf->Ln(10);
         $pdf->SetFont('', 'B', 12);
         $pdf->Cell(10, 8, "No", 1, 0, 'C');
-        $pdf->Cell(50, 8, "Nama", 1, 0, 'C');
+        $pdf->Cell(60, 8, "Nama", 1, 0, 'C');
         $pdf->Cell(20, 8, "Stance", 1, 0, 'C');
         $pdf->Cell(20, 8, "Nocking", 1, 0, 'C');
         $pdf->Cell(20, 8, "Set Up", 1, 0, 'C');
@@ -379,7 +380,7 @@ class Export extends CI_Controller {
         $pdf->Cell(20, 8, "Aiming", 1, 0, 'C');
         $pdf->Cell(20, 8, "Release", 1, 0, 'C');
         $pdf->Cell(20, 8, "Follow Thr.", 1, 0, 'C');
-        $pdf->Cell(35, 8, "Nilai", 1, 1, 'C');
+        $pdf->Cell(20, 8, "Nilai", 1, 1, 'C');
         $pdf->SetFont('', '', 12);
         foreach($data->result_array() as $x => $d) {
             $this->addPenilaian($pdf, $x+1, $d);
@@ -451,7 +452,7 @@ class Export extends CI_Controller {
         $pdf->SetFont('', '', 12);
         $pdf->Cell(90, 8, "Rata-rata", 1, 0, 'C');
         $pdf->SetFont('', 'B', 12);
-        $pdf->Cell(90, 8, $av, 1, 1, 'C');
+        $pdf->Cell(90, 8, number_format($av, 2, '.', ''), 1, 1, 'C');
         $pdf->SetFont('', '', 12);
 
         $tanggal = date('d-m-Y');
@@ -556,10 +557,11 @@ class Export extends CI_Controller {
         $jenis   =  ['', 'Busur', 'Anak Panah', 'Target'];
 
         $pdf->Cell(10, 8, $no, 1, 0, 'C');
-        $pdf->Cell(50, 8, $d['alat'], 1, 0, '');
+        $pdf->Cell(35, 8, $d['alat'], 1, 0, '');
         $pdf->Cell(35, 8, $d['nama'], 1, 0, 'C');
         $pdf->Cell(45, 8, $d['tim'], 1, 0, 'C');
         $pdf->Cell(35, 8, $jenis[$d['jenis']], 1, 0, 'C');
+        $pdf->Cell(15, 8, $d['qty'], 1, 0, 'C');
         $pdf->Cell(20, 8, $kondisi[$d['kondisi']], 1, 1, 'L');
     }
 
@@ -571,7 +573,7 @@ class Export extends CI_Controller {
         }
 
         $pdf->Cell(10, 8, $no, 1, 0, 'C');
-        $pdf->Cell(50, 8, $d['nama'], 1, 0, 'C');
+        $pdf->Cell(60, 8, $d['nama'], 1, 0, 'C');
         $pdf->Cell(20, 8, $d['n1'], 1, 0, 'C');
         $pdf->Cell(20, 8, $d['n2'], 1, 0, 'C');
         $pdf->Cell(20, 8, $d['n3'], 1, 0, 'C');
@@ -581,7 +583,7 @@ class Export extends CI_Controller {
         $pdf->Cell(20, 8, $d['n7'], 1, 0, 'C');
         $pdf->Cell(20, 8, $d['n8'], 1, 0, 'C');
         $pdf->Cell(20, 8, $d['n9'], 1, 0, 'C');
-        $pdf->Cell(35, 8, $av, 1, 1, 'L');
+        $pdf->Cell(20, 8, number_format($av, 2, '.', ''), 1, 1, 'C');
     }
 
 }

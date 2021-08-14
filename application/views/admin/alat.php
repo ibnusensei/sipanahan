@@ -6,7 +6,7 @@
         <div class="white-box">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="box-title">Daftar <?= $title ?></h3>
+                    <h3 class="box-title">Daftar <?= $title ?> Atlet</h3>
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
@@ -47,6 +47,7 @@
                             <th class="border-top-0">Nama</th>
                             <th class="border-top-0">Pemilik</th>
                             <th class="border-top-0">Jenis</th>
+                            <th class="border-top-0">Qty</th>
                             <th class="border-top-0">Kondisi</th>
                             <th class="border-top-0">Aksi</th>
                         </tr>
@@ -63,6 +64,7 @@
                             </td>
                             <td><?= $data->nama ?></td>
                             <td><?= $jenis[$data->jenis - 1]  ?></td>
+                            <td><?= $data->qty ?></td>
                             <td>
                                 <span class="badge badge-primary"><?= $kondisi[$data->kondisi - 1]  ?></span>
                             </td>   
@@ -111,6 +113,13 @@
                             <div class="form-group">
                                 <label for="nama">Nama Alat</label>
                                     <input type="text" class="form-control" name="alat" required placeholder="Nama Alat">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="nama">Qty</label>
+                                    <input type="number" class="form-control" name="qty" required placeholder="Quantity">
                             </div>
                         </div>
 
@@ -192,6 +201,13 @@
                             <div class="form-group">
                                 <label for="nama">Nama Alat</label>
                                     <input type="text" class="form-control" name="alat" value="<?= $d->alat ?>" required placeholder="Nama Alat">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="nama">Qty</label>
+                                    <input type="number" class="form-control" name="qty" value="<?= $d->qty ?>" required placeholder="Quantity">
                             </div>
                         </div>
 
