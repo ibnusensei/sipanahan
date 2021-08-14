@@ -330,7 +330,7 @@ class M_app extends CI_Model {
     }
 
     function getPenilaian($user_id = null) {
-        $this->db->select('(Select (n1+n2+n3+n4+n5+n6+n7+n8+n9)) AS total', FALSE);
+        $this->db->select('(Select (n1+n2+n3+n4+n5+n6+n7+n8+n9)) AS total');
         $this->db->select('penilaian.*, users.id AS user_id, users.nama');
         $this->db->from('penilaian');
         if ($user_id != null) {
