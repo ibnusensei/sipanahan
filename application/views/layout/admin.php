@@ -187,11 +187,11 @@
                                 <span class="hide-menu">Prestasi</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('lapangan') ?>"
+                        <li class="sidebar-item d-none">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('pimpinan') ?>"
                                 aria-expanded="false">
                                 <i class="fa fa-building" aria-hidden="true"></i>
-                                <span class="hide-menu">Lapangan</span>
+                                <span class="hide-menu">Pimpinan</span>
                             </a>
                         </li>
                         <hr>

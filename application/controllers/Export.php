@@ -189,6 +189,29 @@ class Export extends CI_Controller {
         $this->ttd($pdf);
         $pdf->Output('Laporan Data Prestasi Tim.pdf'); 
     }
+    public function pimpinan() {
+        
+        $data = $this->m_app->getPimpinan();
+ 
+        $pdf = new \TCPDF();
+        $pdf->AddPage();
+        $this->head($pdf);
+        $pdf->SetFont('', 'B', 20);
+        $pdf->Cell(185, 0, "Laporan Data Pimpinan", 0, 1, 'C');
+        $pdf->SetAutoPageBreak(true, 0);
+        // Add Header
+        $pdf->Ln(10);
+        $pdf->SetFont('', 'B', 12);
+        $pdf->Cell(10, 8, "id", 1, 0, 'C');
+        $pdf->Cell(55, 8, "nama", 1, 1, 'C');
+        $pdf->SetFont('', '', 12);
+        foreach($data->result_array() as $x => $d) {
+            $this->addPimpinan($pdf, $x+1, $d);
+        }
+        
+        $this->ttd($pdf);
+        $pdf->Output('Laporan Data Prestasi Tim.pdf'); 
+    }
 
     public function pertandingan($user_id = null) {
         
@@ -500,6 +523,11 @@ class Export extends CI_Controller {
         $pdf->Cell(55, 8, $d['tim'], 1, 0, '');
         $pdf->Cell(85, 8, $d['lokasi'], 1, 0, 'C');
         $pdf->Cell(35, 8, $total, 1, 1, 'C');
+    }
+    private function addPimpinan($pdf, $no, $d) {
+
+        $pdf->Cell(10, 8, $d['id'], 1, 0, 'C');
+        $pdf->Cell(55, 8, $d['nama'], 1, 1, '');
     }
 
     private function addPertandingan($pdf, $no, $d) {

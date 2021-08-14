@@ -226,6 +226,11 @@ class M_app extends CI_Model {
         $this->db->from('lapangan');
         return $this->db->get();
     }
+    public function getPimpinan() {
+        $this->db->select('pimpinan.*');
+        $this->db->from('pimpinan');
+        return $this->db->get();
+    }
 
     // Bonus 
     function getBonus($role = null, $var = null, $user_id = null) {

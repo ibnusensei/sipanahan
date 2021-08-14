@@ -3,7 +3,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Lapangan extends CI_Controller {
+class Pimpinan extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
@@ -12,13 +12,13 @@ class Lapangan extends CI_Controller {
 
     public function index() {
         $var    = [
-            'page'  =>  'admin/lapangan',
-            'title' =>  'Lapangan',
-            'lapangan'   =>  $this->m_app->getLapangan()->result(),
-            'user'  =>  $this->m_app->getAnggota()->result(),
+            'page'  =>  'admin/pimpinan',
+            'title' =>  'Pimpinan',
+            'pimpinan'   =>  $this->m_app->getPimpinan()->result(),
+            
 
             // Tambahan
-            'tingkat' => ['Kecamatan', 'Kabupaten / Kota', 'Provinsi', 'Nasional'],
+            
         ];
         $this->load->view('layout/admin', $var);
     }
@@ -29,14 +29,12 @@ class Lapangan extends CI_Controller {
         if ($this->input->post()) {
 
             $data = [
-                'prestasi'  => $this->input->post('prestasi'),
-                'tanggal'   => $this->input->post('tanggal'),
-                'user_id'   => $this->input->post('user_id'),
-                'tingkat'   => $this->input->post('tingkat'),
+                'nama'  => $this->input->post('nama'),
+              
             ];
 
             $data = $this->security->xss_clean($data);
-            $this->m_app->store('prestasi', $data);
+            $this->m_app->store('pimpinan', $data);
             
             $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);
@@ -51,14 +49,12 @@ class Lapangan extends CI_Controller {
         if ($this->input->post()) {
 
             $data = [
-                'prestasi'  => $this->input->post('prestasi'),
-                'tanggal'   => $this->input->post('tanggal'),
-                'user_id'   => $this->input->post('user_id'),
-                'tingkat'   => $this->input->post('tingkat'),
+                'nama'  => $this->input->post('nama'),
+              
             ];
 
             $data = $this->security->xss_clean($data);
-            $this->m_app->update('prestasi', $data, $id);
+            $this->m_app->update('pimpinan', $data, $id);
             
             $this->session->set_flashdata('success', 'Proses Berhasil');
             redirect($_SERVER['HTTP_REFERER']);

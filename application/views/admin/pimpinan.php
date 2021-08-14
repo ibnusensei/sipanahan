@@ -10,22 +10,12 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <form role="search" action="<?= site_url('export/prestasi') ?>" method="get" class="">
-                        <input type="hidden" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a">
-                        <input type="hidden" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b">
-                        <input type="hidden" value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search">
+                    <form role="search" action="<?= site_url('export/pimpinan') ?>" method="get" class="">
                         <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Export</button>
                         <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
                     </form>
                 </div>
                 <div class="col-md-12">
-                    <form role="search" action="<?php echo site_url('prestasi')?>" method="get" class="app-search d-flex me-5">
-                        <input type="date" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a" class="form-control mt-0 w-50 mr-2">
-                        <input type="date" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b" class="form-control mt-0 w-50 mr-2">
-                        <input type="text" placeholder="Cari Nama..." value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search" class="form-control mt-0">
-                        <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
-                        <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url('prestasi')?>" role="button"><i class="fa fa-times"></i></a>
-                    </form>
                 </div>
             </div>
             
@@ -34,20 +24,18 @@
                     <thead>
                         <tr>
                             <th class="border-top-0">#</th>
-                            <th class="border-top-0">Lapangan</th>
-                            <th class="border-top-0">Alamat</th>
-                            <th class="border-top-0">Luas</th>
-                            <th class="border-top-0">Pelatih</th>
+                            <th class="border-top-0">id</th>
+                            <th class="border-top-0">nama</th>
+            
+                        
                             <th class="border-top-0">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($lapangan as $x => $data):?>
+                    <?php foreach ($pimpinan as $x => $data):?>
                         <tr>
                             <td><?= $x+1 ?></td>
-                            <td><?= $data->lapangan ?></td>
-                            <td><?= $data->alamat ?></td>
-                            <td><?= $data->luas ?></td>
+                            <td><?= $data->id ?></td>
                             <td><?= $data->nama ?></td>  
                             <td>
                                 <div class="text-center">
@@ -63,7 +51,7 @@
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                         </a>   
-                                        <a href="<?php echo site_url().'/admin/destroy/prestasi/'.$data->id; ?>" class="btnDelete">
+                                        <a href="<?php echo site_url().'/admin/destroy/pimpinan/'.$data->id; ?>" class="btnDelete">
                                             <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" type="submit" style="float:left;">
                                                 <i class="fa fa-times" style="color: #fafafa;"></i>
                                             </button>
@@ -89,7 +77,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Tambah Data</h4>
             </div>
             <div class="modal-body">
-                <form role="form" action="<?php echo site_url('prestasi/store')?>" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo site_url('pimpinan/store')?>" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Hidden Input disini yaa -->
                             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
@@ -97,41 +85,13 @@
 
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="nama">Prestasi</label>
-                                <input type="text" class="form-control" name="prestasi" required placeholder="Prestasi">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" name="nama" required placeholder="Nama">
                             </div>
                         </div>
 
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="nama">Tanggal</label>
-                                    <input type="date" class="form-control" name="tanggal" required placeholder="Tanggal">
-                            </div>
-                        </div>
+                       
 
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="">Tingkat</label>
-                                <select class="form-control" name="tingkat" required>
-                                    <option>Pilih Tingkat</option>
-                                    <?php foreach ($tingkat as $x => $d) : ?>
-                                        <option value="<?= $x+1 ?>"><?= $d ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="">Anggota</label>
-                                <select class="form-control" name="user_id" required>
-                                    <option>Pilih Anggota</option>
-                                    <?php foreach ($user as $x => $d) : ?>
-                                        <option value="<?= $d->id ?>"><?= $d->nama ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
                     </div>
             </div>
 
@@ -146,7 +106,7 @@
 
 
 <!-- Modal Update User -->
-<?php foreach ($lapangan as $d): ?>
+<?php foreach ($pimpinan as $d): ?>
 <div class="modal fade" id="update_<?= $d->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -154,7 +114,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Edit Prestasi</h4>
             </div>
             <div class="modal-body">
-                <form role="form" action="<?php echo site_url('prestasi/update')?>" method="post" enctype="multipart/form-data">
+                <form role="form" action="<?php echo site_url('pimpinan/update')?>" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Hidden Input disini yaa -->
                             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
@@ -163,41 +123,13 @@
 
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="nama">Prestasi</label>
-                                <input type="text" class="form-control" name="prestasi" value="<?= $d->prestasi ?>" required placeholder="Pertandingan">
+                                <label for="nama">Pimpinan</label>
+                                <input type="text" class="form-control" name="nama" value="<?= $d->nama ?>" required placeholder="Pimpinan">
                             </div>
                         </div>
 
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="nama">Tanggal</label>
-                                    <input type="date" class="form-control" name="tanggal" value="<?= $d->tanggal ?>" required placeholder="Tanggal Pertandingan">
-                            </div>
-                        </div>
+                       
 
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="">Tingkat</label>
-                                <select class="form-control" name="tingkat" required>
-                                    <option>Pilih Tingkat</option>
-                                    <?php foreach ($tingkat as $x => $e) : ?>
-                                        <option value="<?= $x+1 ?>" <?= ($d->tingkat == $x+1) ? 'selected' : '' ?>><?= $e ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="">Anggota</label>
-                                <select class="form-control" name="user_id" required>
-                                    <option>Pilih Anggota</option>
-                                    <?php foreach ($user as $x => $e) : ?>
-                                        <option value="<?= $e->id ?>" <?= ($d->user_id == $e->id) ? 'selected' : '' ?>><?= $e->nama ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
                     </div>
             </div>
 
