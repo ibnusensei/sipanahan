@@ -43,6 +43,7 @@ class Alat extends CI_Controller {
                 'user_id'   => $this->input->post('user_id'),
                 'jenis'     => $this->input->post('jenis'),
                 'kondisi'   => $this->input->post('kondisi'),
+                'qty'       => $this->input->post('qty'),
                 'image'     => $image
             ];
 
@@ -80,6 +81,7 @@ class Alat extends CI_Controller {
                 'user_id'   => $this->input->post('user_id'),
                 'jenis'     => $this->input->post('jenis'),
                 'kondisi'   => $this->input->post('kondisi'),
+                'qty'       => $this->input->post('qty'),
                 'image'     => $image
             ];
 

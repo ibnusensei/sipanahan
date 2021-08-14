@@ -9,7 +9,7 @@
                     <h3 class="box-title">Daftar <?= $title ?></h3>
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
-                <div class="col-md-6 text-right" >
+                <div class="col-md-6 text-right d-none" >
                     <a name="" id="" class="btn btn-success text-white mr-3" href="<?= site_url('export/prestasi/'.$this->session->id) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Export</a>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                             <th class="border-top-0">Tanggal</th>
                             <th class="border-top-0">Prestasi</th>
                             <th class="border-top-0">Tingkat</th>
-                            <th>Aksi</th>
+                            <th class="d-none">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,7 +32,7 @@
                             <td><?= longdate_indo($data->tanggal) ?></td>
                             <td><?= $data->prestasi ?></td>
                             <td><?= $tingkat[$data->tingkat - 1] ?></td>
-                            <td>
+                            <td class="d-none">
                                 <a href="<?php echo site_url('export/surat_prestasi/'.$data->id); ?>" >
                                     <button class="btn btn-sm btn-success mr-1" style="float:left;">
                                         <i class="fa fa-file" style="color: #fafafa;"></i>
