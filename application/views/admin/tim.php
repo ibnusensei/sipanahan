@@ -10,7 +10,9 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
+                <?php if ($this->session->level == 1): ?>
                     <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    <?php endif ?>
                 </div>
                 <div class="col-md-6">
                     <form role="search" action="<?php echo site_url('tim')?>" method="get" class="app-search d-flex me-5">
@@ -29,7 +31,9 @@
                             <th class="border-top-0">Nama</th>
                             <th class="border-top-0">Lokasi</th>
                             <th class="border-top-0">Cabang</th>
+                            <?php if ($this->session->level == 1): ?>
                             <th class="border-top-0">Aksi</th>
+                            <?php endif ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +43,7 @@
                             <td><?= $data->tim ?></td>
                             <td><?= $data->lokasi ?></td>
                             <td><?= $data->cabang ?></td>
+                            <?php if ($this->session->level == 1): ?>
                             <td>
                                 <div class="text-center">
                                     <span>
@@ -56,6 +61,7 @@
                                     </span>
                                 </div>
                             </td>
+                            <?php endif ?>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

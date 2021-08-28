@@ -13,8 +13,10 @@
                     <form role="search" action="<?= site_url('export/pertandingan') ?>" method="get" class="">
                         <input type="hidden" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a">
                         <input type="hidden" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b">
-                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Export</button>
+                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
+                        <?php if ($this->session->level == 1): ?>
                         <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                        <?php endif ?>
                     </form>
                 </div>
                 <div class="col-md-6">
@@ -36,7 +38,9 @@
                             <th class="border-top-0">Pertandingan</th>
                             <th class="border-top-0">Tingkat</th>
                             <th class="border-top-0">Pelatih</th>
+                            <?php if ($this->session->level == 1): ?>
                             <th class="border-top-0">Aksi</th>
+                            <?php endif ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +51,7 @@
                             <td><?= $data->tempat ?></td>
                             <td><?= $tingkat[$data->tingkat - 1] ?></td>
                             <td><?= $data->nama ?></td>  
+                            <?php if ($this->session->level == 1): ?>
                             <td>
                                 <div class="text-center">
                                     <span>  
@@ -70,6 +75,7 @@
                                     </span> 
                                 </div>
                             </td>
+                            <?php endif ?>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

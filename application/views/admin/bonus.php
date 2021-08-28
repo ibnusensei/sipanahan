@@ -14,8 +14,10 @@
                         <input type="hidden" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a">
                         <input type="hidden" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b">
                         <input type="hidden" name="role" value="<?php echo ($title == 'Atlet') ? '3' : '2' ?>">
-                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Export</button>
+                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
+                        <?php if ($this->session->level == 1): ?>
                         <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                        <?php endif ?>
                     </form>
                 </div>
                 <div class="col-md-6">
@@ -59,6 +61,7 @@
                                                 <i class="fa fa-eye" style="color: #fafafa;"></i>
                                             </button>
                                         </a> 
+                                        <?php if ($this->session->level == 1): ?>
                                         <a style="cursor: pointer;" data-toggle="modal" data-target="#update_<?=$data->id?>">
                                             <button class="btn btn-sm btn-primary mr-1"  data-placement="top"
                                                     title="" data-original-title="Edit" style="float:left;">
@@ -70,6 +73,7 @@
                                                 <i class="fa fa-times" style="color: #fafafa;"></i>
                                             </button>
                                         </a>    
+                                        <?php endif ?>
                                     </span> 
                                 </div>
                             </td>

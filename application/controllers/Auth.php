@@ -16,6 +16,39 @@ class Auth extends CI_Controller {
      
     }
 
+    public function forgot_password() {
+    	$var['page']    = 'auth/forgot_password';
+        $this->load->view('layout/auth', $var);
+     
+    }
+
+    public function reset_password($reset_key) {
+    	$var['page']    = 'auth/reset_password';
+        $var['reset_key'] = $reset_key;
+        $this->load->view('layout/auth', $var);
+     
+    }
+
+    public function update_password()
+	{
+        $reset_key     = $this->input->post('reset_password');
+        $pw     = $this->input->post('password');
+        $user   = $this->m_app->getUserWithKey($reset_key);
+
+        if (empty($user)){
+            $this->session->set_flashdata('message', 'Key Tidak Valid');
+            redirect('auth');
+        } else {
+            $data['password'] = $this->bcrypt->hash($this->input->post('password'));
+
+            $data = $this->security->xss_clean($data);
+            $this->m_app->update('users', $data, $user->id);
+
+            $this->session->set_flashdata('message', 'Reset Berhasil');
+            redirect('auth');
+        }
+    }
+
      public function register() {
     	$var['page'] = 'auth/register';
         $this->load->view('auth/register', $var);
@@ -24,12 +57,12 @@ class Auth extends CI_Controller {
     
     public function login()
 	{
-        $un     = $this->input->post('username');
+        $email     = $this->input->post('email');
         $pw     = $this->input->post('password');
-        $user   = $this->m_app->getUser($un);
+        $user   = $this->m_app->getUser($email);
 
         if (empty($user)){
-            $this->session->set_flashdata('message', 'Username tidak ditemukan');
+            $this->session->set_flashdata('message', 'Email tidak ditemukan');
             redirect('auth');
         } else {
             if(password_verify($pw, $user->password)) {
@@ -46,7 +79,7 @@ class Auth extends CI_Controller {
 
                 $this->session->set_userdata($session);
 
-                if ($user->level == 1) {
+                if ($user->level == 1 or $user->level == 4) {
                     redirect('admin');
                 } elseif ($user->level == 2) {
                     redirect('pelatih');
@@ -60,6 +93,58 @@ class Auth extends CI_Controller {
             } else {
                 $this->session->set_flashdata('message', 'Password salah');
                 redirect('auth');
+            }
+        }
+    }
+
+    public function check_email()
+	{
+        $email     = $this->input->post('email');
+        $user   = $this->m_app->getUser($email);
+
+        if (empty($user)){
+            $this->session->set_flashdata('message', 'Email tidak ditemukan');
+            redirect('auth/forgot_password');
+        } else {
+            $reset_key = random_string('alnum', 50);
+            if ($this->m_app->update_reset_key($email, $reset_key)) {
+                $this->load->library('email');
+				$config = array();
+				$config['charset'] = 'utf-8';
+				$config['useragent'] = 'Codeigniter';
+				$config['protocol']= "smtp";
+				$config['mailtype']= "html";
+				$config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+				$config['smtp_port']= "465";
+				$config['smtp_timeout']= "5";
+				$config['smtp_user']= "neonsensei69@gmail.com"; // isi dengan email kamu
+				$config['smtp_pass']= "Fire0799"; // isi dengan password kamu
+				$config['crlf']="\r\n"; 
+				$config['newline']="\r\n"; 
+				$config['wordwrap'] = TRUE;
+				//memanggil library email dan set konfigurasi untuk pengiriman email
+					
+				$this->email->initialize($config);
+				//konfigurasi pengiriman
+				$this->email->from($config['smtp_user']);
+				$this->email->to($this->input->post('email'));
+				$this->email->subject("Reset your password");
+ 
+				$message = "<h1>Sistem Informasi Atlet Panahan Banjarmasin</h1><br><p>Anda melakukan permintaan reset password</p>";
+				$message .= "<a class='btn btn-primary' href='".site_url('auth/reset_password/'.$reset_key)."'>klik reset password</a>";
+				$this->email->message($message);
+				
+				if($this->email->send())
+				{
+					echo "silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password';
+				}else
+				{
+					echo "Berhasil melakukan registrasi, gagal mengirim verifikasi email";
+				}
+				
+				echo "<br><br><a href='".site_url("auth")."'>Kembali ke Menu Login</a>";
+            } else {
+                var_dump('error');
             }
         }
     }

@@ -20,10 +20,27 @@ class M_app extends CI_Model {
     	return $this->db->get('users')->row();
     }
 
+    function getUserWithKey($var) {
+    	$this->db->where('reset_password', $var);
+    	return $this->db->get('users')->row();
+    }
+
     function getUser($var) {
-    	$this->db->where('username', $var);
+    	$this->db->where('email', $var);
         $this->db->where('status', 1);
     	return $this->db->get('users')->row();
+    }
+
+    public function update_reset_key($email, $reset_key)
+    {
+        $this->db->where('email', $email);
+        $data = array('reset_password' => $reset_key);
+        $this->db->update('users', $data);
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     function getPengguna($var = null) {
@@ -363,6 +380,34 @@ class M_app extends CI_Model {
         $params['size'] = 10;
         $params['savename'] = FCPATH.$config['imagedir'].$qrcode; //simpan image QR CODE ke folder assets/images/
         return $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+    }
+
+    function kirimNotifikasi($phone,$msg)
+    {
+            $link  =  "https://tx.wablas.com/api/send-message";
+            $data = [
+            'phone' => $phone,
+            'message' => $msg,
+            ];
+            
+            
+            $curl = curl_init();
+            $token =  "beJoWcnPwXygKxALNZbuHuozGPL9BJ1hTrwOuzFafL0zKxtVnxJlvFTvk1I7XU0N";
+    
+            curl_setopt($curl, CURLOPT_HTTPHEADER,
+                array(
+                    "Authorization: $token",
+                )
+            );
+            curl_setopt($curl, CURLOPT_URL, $link);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data)); 
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+            $result = curl_exec($curl);
+            curl_close($curl); 
+            return $result;
     }
 
 }

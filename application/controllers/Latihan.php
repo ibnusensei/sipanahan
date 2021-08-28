@@ -108,4 +108,17 @@ class Latihan extends CI_Controller {
 
     }
 
+    public function notifikasi($id) {
+        $data = $this->m_app->getLatihan($id)->row();
+        $user = $this->m_app->getAnggota();
+
+        $msg = '[Pengumuman] Latihan akan dilaksanakan tanggal '. longdate_indo($data->tanggal) . ', pada pukul '. $data->waktu .'. Bertempat di '. $data->tempat .'. Dimohon untuk datang 15 menit sebelum latihan dimulai. (note : '. $data->deskripsi. ')';
+        foreach ($user->result() as $d) {
+            $this->m_app->kirimNotifikasi($d->telepon, $msg);
+        }
+
+        $this->session->set_flashdata('success', 'Proses Berhasil. ' .$user->num_rows(). ' anggota telah mendapatkan notifikasi');
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
 }

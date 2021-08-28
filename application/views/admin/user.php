@@ -26,9 +26,11 @@
                         </button>
                     </a>
                     <?php endif; ?>
-                    <a name="" id="" class="btn btn-success text-white mr-1" href="<?= site_url('export/'.$role[$level]) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Export</a>
+                    <a name="" id="" class="btn btn-success text-white mr-1" href="<?= site_url('export/'.$role[$level]) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Cetak</a>
                     <a name="" id="" class="btn btn-warning mr-1" href="<?= site_url('bonus/'.$role[$level]) ?>" role="button"><i class="fa fa-dollar" aria-hidden="true"></i> Bonus</a>
+                    <?php if ($this->session->level == 1): ?>
                     <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    <?php endif ?>
                 </div>
                 <div class="col-md-6">
                 <form role="search" action="<?php echo site_url($linksearch)?>" method="get" class="app-search d-flex me-5">
@@ -73,12 +75,14 @@
                             <td>
                                 <div class="text-center">
                                     <span>  
+                                    <?php if ($this->session->level == 1): ?>
                                         <a style="cursor: pointer;" data-toggle="modal" data-target="#update_<?=$data->id?>">
                                             <button class="btn btn-sm btn-primary mr-1"  data-placement="top"
                                                     title="" data-original-title="Edit" style="float:left;">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                        </a>    
+                                        </a>   
+                                    <?php endif ?> 
                                         
                                         <?php if ($level == 3): ?>
 
@@ -98,11 +102,13 @@
                                             </button>
                                         </a>
                                         <?php endif; ?> 
+                                        <?php if ($this->session->level == 1): ?>
                                         <a href="<?php echo site_url().'/admin/destroy/users/'.$data->id; ?>" class="btnDelete">
                                             <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" type="submit" style="float:left;">
                                                 <i class="fa fa-times" style="color: #fafafa;"></i>
                                             </button>
                                         </a>  
+                                        <?php endif ?>
                                     </span> 
                                 </div>
                             </td>

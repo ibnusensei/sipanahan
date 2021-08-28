@@ -10,7 +10,9 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
+                <?php if ($this->session->level == 1): ?>
                     <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
+                    <?php endif ?>
                 </div>
                 <div class="col-md-6">
                     <form role="search" action="<?php echo site_url('latihan')?>" method="get" class="app-search d-flex me-5">
@@ -49,6 +51,14 @@
                                                 <i class="fa fa-user" style="color: #fafafa;"></i>
                                             </button>
                                         </a> 
+                                        <?php if ($this->session->level == 1): ?>
+                                        <?php if (date('Y-m-d') < $data->tanggal) : ?>
+                                        <a href="<?php echo site_url().'/latihan/notifikasi/'.$data->id; ?>">
+                                            <button class="btn btn-sm btn-success text-white mr-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="Kirim Notifikasi"style="float:left;">
+                                                <i class="fa fa-whatsapp" style="color: #fafafa;"></i> Kirim Notifikasi
+                                            </button>
+                                        </a>  
+                                        <?php endif; ?>
                                         <a style="cursor: pointer;" data-toggle="modal" data-target="#update_<?=$data->id?>">
                                             <button class="btn btn-sm btn-primary mr-1"  data-placement="top"
                                                     title="" data-original-title="Edit" style="float:left;">
@@ -59,7 +69,8 @@
                                             <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" type="submit" style="float:left;">
                                                 <i class="fa fa-times" style="color: #fafafa;"></i>
                                             </button>
-                                        </a>    
+                                        </a>   
+                                        <?php endif ?> 
                                     </span> 
                                 </div>
                             </td>

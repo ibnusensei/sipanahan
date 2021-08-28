@@ -20,7 +20,7 @@
         function check_admin() {
             $ci = get_instance();
             $level = $ci->session->userdata('level');
-            if ($level != '1') {
+            if ($level == 2 && $level == 3) {
                 $ci->session->set_flashdata('message', 'Akses tidak dizinkan');
                 redirect(site_url('auth'));
             }
