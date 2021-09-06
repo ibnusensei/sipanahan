@@ -4,9 +4,9 @@
 <?php 
     $role = ['', 'admin', 'pelatih', 'atlet'];
     if ($level == 3) {
-        $linksearch = 'user';
+        $linksearch = 'laporan/atlet';
     } else {
-        $linksearch = 'user/pelatih';
+        $linksearch = 'laporan/pelatih';
     }
 ?>
 
@@ -15,21 +15,19 @@
         <div class="white-box">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="box-title">Daftar <?= $title ?></h3>
+                    <h3 class="box-title">Laporan Data <?= $title ?></h3>
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
                     <?php if ($level == 3): ?>
-                    <a href="<?php echo site_url('export/penilaian'); ?>" class="d-none" >
+                    <a href="<?php echo site_url('export/penilaian'); ?>" >
                         <button class="btn btn-info mr-1" style="color: #fafafa;">
                             <i class="fa fa-chart-area"></i> Penilaian
                         </button>
                     </a>
                     <?php endif; ?>
-                    <a name="" id="" class="btn btn-success text-white mr-1 d-none" href="<?= site_url('export/'.$role[$level]) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Cetak</a>
-                    <a name="" id="" class="btn btn-warning mr-1" href="<?= site_url('bonus/'.$role[$level]) ?>" role="button"><i class="fa fa-dollar" aria-hidden="true"></i> Bonus</a>
+                    <a target="_blank" name="" id="" class="btn btn-success text-white mr-1" href="<?= site_url('export/'.$role[$level]) ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Cetak</a>
                     <?php if ($this->session->level == 1): ?>
-                    <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
                     <?php endif ?>
                 </div>
                 <div class="col-md-6">
@@ -74,41 +72,24 @@
                             </td>   
                             <td>
                                 <div class="text-center">
-                                    <span>  
-                                    <?php if ($this->session->level == 1): ?>
-                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#update_<?=$data->id?>">
-                                            <button class="btn btn-sm btn-primary mr-1"  data-placement="top"
-                                                    title="" data-original-title="Edit" style="float:left;">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                        </a>   
-                                    <?php endif ?> 
-                                        
-                                        <?php if ($level == 3): ?>
-
-                                        <a href="<?php echo site_url('export/user/'.$data->id); ?>" class="d-none">
+                                    <span>     
+                                        <a href="<?php echo site_url('export/user/'.$data->id); ?>" target="_blank" >
                                             <button class="btn btn-sm btn-success mr-1" style="float:left;">
                                                 <i class="fa fa-file" style="color: #fafafa;"></i>
                                             </button>
-                                        </a>
-                                        <a href="<?php echo site_url('export/prestasi/'.$data->id); ?>" class="d-none" >
+                                        </a>                                     
+                                        <?php if ($level == 3): ?>
+                                        <a href="<?php echo site_url('export/prestasi/'.$data->id); ?>" target="_blank" >
                                             <button class="btn btn-sm btn-warning mr-1"  style="float:left;">
                                                 <i class="fa fa-chart-line" style="color: #fafafa;"></i>
                                             </button>
                                         </a>
-                                        <a style="cursor: pointer;" data-toggle="modal" class="d-none" data-target="#nilai_<?=$data->id?>">
+                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#nilai_<?=$data->id?>">
                                             <button class="btn btn-sm btn-info mr-1"  style="float:left; color: #fafafa;">
                                                 <i class="fa fa-chart-area"></i>
                                             </button>
                                         </a>
                                         <?php endif; ?> 
-                                        <?php if ($this->session->level == 1): ?>
-                                        <a href="<?php echo site_url().'/admin/destroy/users/'.$data->id; ?>" class="btnDelete">
-                                            <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" type="submit" style="float:left;">
-                                                <i class="fa fa-times" style="color: #fafafa;"></i>
-                                            </button>
-                                        </a>  
-                                        <?php endif ?>
                                     </span> 
                                 </div>
                             </td>
@@ -475,7 +456,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary d-none">Save</button>
-                    <a href="<?php echo site_url('export/nilai/'.$d->id); ?>"  class="btn btn-info mr-1" style="color: #fafafa;" >
+                    <a target="_blank" href="<?php echo site_url('export/nilai/'.$d->id); ?>"  class="btn btn-info mr-1" style="color: #fafafa;" >
                        <i class="fa fa-print"></i> Cetak
                     </a>
                 </form>

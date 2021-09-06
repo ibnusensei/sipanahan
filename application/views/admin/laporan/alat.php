@@ -10,18 +10,15 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <form role="search" action="<?= site_url('export/alat') ?>" method="get" class="">
+                    <form role="search" action="<?= site_url('export/alat') ?>" method="get" target="_blank" class="">
                         <input type="hidden" value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search">
                         <input type="hidden" value="<?php echo (!empty($_GET['kondisi'])) ? $_GET['kondisi'] : '' ?>" name="kondisi">
                         <input type="hidden" value="<?php echo (!empty($_GET['jenis'])) ? $_GET['jenis'] : '' ?>" name="jenis">
-                        <button type="submit" class="btn btn-success text-white mr-3 d-none"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
-                        <?php if ($this->session->level == 1): ?>
-                        <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
-                        <?php endif ?>
+                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
                     </form>
                 </div>
                 <div class="col-md-12">
-                    <form role="search" action="<?php echo site_url('alat')?>" method="get" class="app-search d-flex me-5">
+                    <form role="search" action="<?php echo site_url('laporan/alat')?>" method="get" class="app-search d-flex me-5">
                         <input type="text" placeholder="Cari Alat..." value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search" class="form-control mt-0 mr-2">
                         <select class="form-control mr-2" name="kondisi" >
                             <option value="">Pilih Kondisi</option>
@@ -36,7 +33,7 @@
                             <?php endforeach; ?>
                         </select>
                         <button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
-                        <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url('alat')?>" role="button"><i class="fa fa-times"></i></a>
+                        <a name="" id="" class="btn btn-link text-danger" href="<?php echo site_url('laporan/alat')?>" role="button"><i class="fa fa-times"></i></a>
                     </form>
                 </div>
             </div>
@@ -51,9 +48,6 @@
                             <th class="border-top-0">Jenis</th>
                             <th class="border-top-0">Qty</th>
                             <th class="border-top-0">Kondisi</th>
-                            <?php if ($this->session->level == 1): ?>
-                            <th class="border-top-0">Aksi</th>
-                            <?php endif ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,26 +65,7 @@
                             <td><?= $data->qty ?></td>
                             <td>
                                 <span class="badge badge-primary"><?= $kondisi[$data->kondisi - 1]  ?></span>
-                            </td>   
-                            <?php if ($this->session->level == 1): ?>
-                            <td>
-                                <div class="text-center">
-                                    <span>  
-                                        <a style="cursor: pointer;" data-toggle="modal" data-target="#update_<?=$data->id?>">
-                                            <button class="btn btn-sm btn-primary mr-1"  data-placement="top"
-                                                    title="" data-original-title="Edit" style="float:left;">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                        </a>    
-                                        <a href="<?php echo site_url().'/admin/destroy/alat/'.$data->id; ?>" class="btnDelete">
-                                            <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" type="submit" style="float:left;">
-                                                <i class="fa fa-times" style="color: #fafafa;"></i>
-                                            </button>
-                                        </a>    
-                                    </span> 
-                                </div>
-                            </td>
-                            <?php endif ?>
+                            </td> 
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

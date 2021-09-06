@@ -14,7 +14,7 @@
                         <input type="hidden" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a">
                         <input type="hidden" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b">
                         <input type="hidden" name="role" value="<?php echo ($title == 'Atlet') ? '3' : '2' ?>">
-                        <button type="submit" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
+                        <button type="submit" target="_blank" class="btn btn-success text-white mr-3"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
                         <?php if ($this->session->level == 1): ?>
                         <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
                         <?php endif ?>

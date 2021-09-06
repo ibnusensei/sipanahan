@@ -233,6 +233,10 @@ class M_app extends CI_Model {
             $this->db->like('users.nama', $_GET['search']);
         }
 
+        if (!empty($_GET['tingkat'])) {
+            $this->db->where('prestasi.tingkat', $_GET['tingkat']);
+        }
+
         $this->db->join('tim', 'tim.id = users.tim_id');
     	return $this->db->get();
     }

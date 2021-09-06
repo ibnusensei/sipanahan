@@ -138,135 +138,62 @@
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Master Data</span>
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('user') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="hide-menu">Atlet</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('user') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span class="hide-menu">Atlet</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('user/pelatih') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span class="hide-menu">Pelatih</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('tim') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-users" aria-hidden="true"></i>
-                                        <span class="hide-menu">Team</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('alat') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-box-open" aria-hidden="true"></i>
-                                        <span class="hide-menu">Alat</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('lapangan') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-building" aria-hidden="true"></i>
-                                        <span class="hide-menu">Lapangan</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Proses</span>
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('user/pelatih') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="hide-menu">Pelatih</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('latihan') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Latihan</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('pertandingan') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-flag" aria-hidden="true"></i>
-                                        <span class="hide-menu">Pertandingan</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('prestasi') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-chart-line" aria-hidden="true"></i>
-                                        <span class="hide-menu">Prestasi</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
-                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Laporan</span>
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('tim') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <span class="hide-menu">Team</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('laporan/atlet') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Laporan Data Atlet</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('laporan/pelatih') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Laporan Data Pelatih</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" target="_blank" href="<?= site_url('export/prestasitim') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Laporan Prestasi Tim</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('laporan/prestasi') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Laporan Prestasi Atlet</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('laporan/alat') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Laporan Data Alat Atlet</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('laporan/latihan') ?>"
-                                        aria-expanded="false">
-                                        <i class="fa fa-clipboard-list" aria-hidden="true"></i>
-                                        <span class="hide-menu">Laporan Latihan & Kehadiran</span>
-                                    </a>
-                                </li>
-
-                            </ul>
                         </li>
-                        
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('alat') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-box-open" aria-hidden="true"></i>
+                                <span class="hide-menu">Alat</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('latihan') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-clipboard-list" aria-hidden="true"></i>
+                                <span class="hide-menu">Latihan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('pertandingan') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                <span class="hide-menu">Pertandingan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('prestasi') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-chart-line" aria-hidden="true"></i>
+                                <span class="hide-menu">Prestasi</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= site_url('lapangan') ?>"
+                                aria-expanded="false">
+                                <i class="fa fa-building" aria-hidden="true"></i>
+                                <span class="hide-menu">Lapangan</span>
+                            </a>
+                        </li>
                         <hr>
                         <li class="text-center p-20 upgrade-btn">
                             <a href="<?= site_url('auth/logout') ?>"

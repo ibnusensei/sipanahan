@@ -10,12 +10,12 @@
                     <p class="text-muted">Sistem Informasi Atlet Panahan Banjarmasin</p>
                 </div>
                 <div class="col-md-6 text-right" >
-                    <form role="search" action="<?= site_url('export/prestasi') ?>" method="get" class="">
+                    <form role="search" action="<?= site_url('export/prestasi') ?>" method="get" target="_blank" class="">
                         <input type="hidden" value="<?php echo (!empty($_GET['a'])) ? $_GET['a'] : '' ?>" name="a">
                         <input type="hidden" value="<?php echo (!empty($_GET['b'])) ? $_GET['b'] : '' ?>" name="b">
                         <input type="hidden" value="<?php echo (!empty($_GET['search'])) ? $_GET['search'] : '' ?>" name="search">
-                        <button type="submit" class="btn btn-success text-white mr-1"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
-                        <a name="" id="" class="btn btn-warning mr-1" href="<?= site_url('export/prestasitim') ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Prestasi Team</a>
+                        <button type="submit" class="btn btn-success text-white mr-1 d-none"><i class="fa fa-file" aria-hidden="true"></i> Cetak</button>
+                        <a name="" id="" class="btn btn-warning mr-1 d-none" href="<?= site_url('export/prestasitim') ?>" role="button"><i class="fa fa-file" aria-hidden="true"></i> Prestasi Team</a>
                         <?php if ($this->session->level == 1): ?>
                         <a name="" id="" class="btn btn-primary" href="#" role="button" data-toggle="modal" data-target="#create"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</a>
                         <?php endif ?>
@@ -55,7 +55,7 @@
                             <td>
                                 <div class="text-center">
                                     <span>  
-                                        <a href="<?php echo site_url('export/surat_prestasi/'.$data->id); ?>" >
+                                        <a href="<?php echo site_url('export/surat_prestasi/'.$data->id); ?>" class="d-none" >
                                             <button class="btn btn-sm btn-success mr-1" style="float:left;">
                                                 <i class="fa fa-file" style="color: #fafafa;"></i>
                                             </button>
